@@ -33,12 +33,14 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.uname = new System.Windows.Forms.TextBox();
-            this.pword = new System.Windows.Forms.TextBox();
+            this.Regbutton = new System.Windows.Forms.Button();
+            this.closer = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.pword = new System.Windows.Forms.TextBox();
+            this.uname = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -80,6 +82,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.Regbutton);
+            this.panel1.Controls.Add(this.closer);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.pword);
             this.panel1.Controls.Add(this.uname);
@@ -90,52 +94,28 @@
             this.panel1.Size = new System.Drawing.Size(334, 357);
             this.panel1.TabIndex = 3;
             // 
-            // label1
+            // Regbutton
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(533, 144);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 20);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Login/Register";
+            this.Regbutton.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Regbutton.ForeColor = System.Drawing.Color.Black;
+            this.Regbutton.Location = new System.Drawing.Point(128, 264);
+            this.Regbutton.Name = "Regbutton";
+            this.Regbutton.Size = new System.Drawing.Size(100, 32);
+            this.Regbutton.TabIndex = 6;
+            this.Regbutton.Text = "Register";
+            this.Regbutton.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // closer
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(124, 34);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 20);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Username";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(127, 122);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 20);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Password";
-            // 
-            // uname
-            // 
-            this.uname.Location = new System.Drawing.Point(45, 76);
-            this.uname.Name = "uname";
-            this.uname.Size = new System.Drawing.Size(257, 22);
-            this.uname.TabIndex = 2;
-            // 
-            // pword
-            // 
-            this.pword.Location = new System.Drawing.Point(45, 161);
-            this.pword.Name = "pword";
-            this.pword.Size = new System.Drawing.Size(257, 22);
-            this.pword.TabIndex = 3;
+            this.closer.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.closer.ForeColor = System.Drawing.Color.Black;
+            this.closer.Location = new System.Drawing.Point(128, 322);
+            this.closer.Name = "closer";
+            this.closer.Size = new System.Drawing.Size(100, 32);
+            this.closer.TabIndex = 5;
+            this.closer.Text = "Close";
+            this.closer.UseVisualStyleBackColor = true;
+            this.closer.Click += new System.EventHandler(this.closer_Click);
             // 
             // button1
             // 
@@ -148,6 +128,54 @@
             this.button1.Text = "Login";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // pword
+            // 
+            this.pword.Location = new System.Drawing.Point(45, 161);
+            this.pword.Name = "pword";
+            this.pword.Size = new System.Drawing.Size(257, 22);
+            this.pword.TabIndex = 3;
+            this.pword.UseSystemPasswordChar = true;
+            // 
+            // uname
+            // 
+            this.uname.Location = new System.Drawing.Point(45, 76);
+            this.uname.Name = "uname";
+            this.uname.Size = new System.Drawing.Size(257, 22);
+            this.uname.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(127, 122);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(101, 20);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Password";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(124, 34);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 20);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Username";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(533, 144);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(153, 20);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Login/Register";
             // 
             // Login
             // 
@@ -163,6 +191,8 @@
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Login";
             this.Text = "Bailout-Login";
             this.Load += new System.EventHandler(this.Login_Load);
@@ -188,6 +218,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button closer;
+        private System.Windows.Forms.Button Regbutton;
     }
 }
 
