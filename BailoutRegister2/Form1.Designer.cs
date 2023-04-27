@@ -98,9 +98,9 @@
             // 
             this.Regbutton.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Regbutton.ForeColor = System.Drawing.Color.Black;
-            this.Regbutton.Location = new System.Drawing.Point(128, 264);
+            this.Regbutton.Location = new System.Drawing.Point(111, 265);
             this.Regbutton.Name = "Regbutton";
-            this.Regbutton.Size = new System.Drawing.Size(100, 32);
+            this.Regbutton.Size = new System.Drawing.Size(139, 32);
             this.Regbutton.TabIndex = 6;
             this.Regbutton.Text = "Register";
             this.Regbutton.UseVisualStyleBackColor = true;
