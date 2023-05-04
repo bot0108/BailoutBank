@@ -156,7 +156,6 @@
             this.uname.Name = "uname";
             this.uname.Size = new System.Drawing.Size(257, 22);
             this.uname.TabIndex = 2;
-            this.uname.TextChanged += new System.EventHandler(this.uname_TextChanged);
             // 
             // label3
             // 
