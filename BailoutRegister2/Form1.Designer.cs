@@ -33,7 +33,8 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.Regbutton = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.closer = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pword = new System.Windows.Forms.TextBox();
@@ -82,7 +83,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.Regbutton);
+            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.closer);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.pword);
@@ -94,16 +96,27 @@
             this.panel1.Size = new System.Drawing.Size(334, 357);
             this.panel1.TabIndex = 3;
             // 
-            // Regbutton
+            // button3
             // 
-            this.Regbutton.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Regbutton.ForeColor = System.Drawing.Color.Black;
-            this.Regbutton.Location = new System.Drawing.Point(111, 265);
-            this.Regbutton.Name = "Regbutton";
-            this.Regbutton.Size = new System.Drawing.Size(139, 32);
-            this.Regbutton.TabIndex = 6;
-            this.Regbutton.Text = "Register";
-            this.Regbutton.UseVisualStyleBackColor = true;
+            this.button3.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button3.ForeColor = System.Drawing.Color.Black;
+            this.button3.Location = new System.Drawing.Point(45, 264);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(100, 27);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "Register";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button2.ForeColor = System.Drawing.Color.Black;
+            this.button2.Location = new System.Drawing.Point(182, 227);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(120, 52);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "Forgotten password";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // closer
             // 
@@ -121,7 +134,7 @@
             // 
             this.button1.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(128, 214);
+            this.button1.Location = new System.Drawing.Point(45, 213);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 27);
             this.button1.TabIndex = 4;
@@ -143,6 +156,7 @@
             this.uname.Name = "uname";
             this.uname.Size = new System.Drawing.Size(257, 22);
             this.uname.TabIndex = 2;
+            this.uname.TextChanged += new System.EventHandler(this.uname_TextChanged);
             // 
             // label3
             // 
@@ -219,7 +233,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button closer;
-        private System.Windows.Forms.Button Regbutton;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
     }
 }
 

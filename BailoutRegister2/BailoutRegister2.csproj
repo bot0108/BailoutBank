@@ -75,6 +75,24 @@
     <Compile Include="Accountcs.Designer.cs">
       <DependentUpon>Accountcs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Create.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Create.Designer.cs">
+      <DependentUpon>Create.cs</DependentUpon>
+    </Compile>
+    <Compile Include="csange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="csange.Designer.cs">
+      <DependentUpon>csange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forgotten.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forgotten.Designer.cs">
+      <DependentUpon>Forgotten.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +125,18 @@
     <Compile Include="settings.Designer.cs">
       <DependentUpon>settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Terminate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Terminate.Designer.cs">
+      <DependentUpon>Terminate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Terms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Terms.Designer.cs">
+      <DependentUpon>Terms.cs</DependentUpon>
+    </Compile>
     <Compile Include="Transfer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +145,15 @@
     </Compile>
     <EmbeddedResource Include="Accountcs.resx">
       <DependentUpon>Accountcs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Create.resx">
+      <DependentUpon>Create.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="csange.resx">
+      <DependentUpon>csange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forgotten.resx">
+      <DependentUpon>Forgotten.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -139,6 +178,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="settings.resx">
       <DependentUpon>settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Terminate.resx">
+      <DependentUpon>Terminate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Terms.resx">
+      <DependentUpon>Terms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Transfer.resx">
       <DependentUpon>Transfer.cs</DependentUpon>
