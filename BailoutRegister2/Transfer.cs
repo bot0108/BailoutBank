@@ -21,5 +21,10 @@ namespace BailoutRegister2
         {
 
         }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

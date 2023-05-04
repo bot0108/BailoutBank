@@ -226,7 +226,7 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label10.Location = new System.Drawing.Point(436, 438);
+            this.label10.Location = new System.Drawing.Point(860, 165);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(77, 20);
             this.label10.TabIndex = 18;
@@ -239,7 +239,7 @@
             this.comboBox1.Items.AddRange(new object[] {
             "Female",
             "Male"});
-            this.comboBox1.Location = new System.Drawing.Point(437, 481);
+            this.comboBox1.Location = new System.Drawing.Point(864, 199);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 19;
