@@ -14,9 +14,11 @@ namespace BailoutRegister2
         [STAThread]
         static void Main()
         {
+            Data data = new Data();
+            data.Initialize();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            Application.Run(new Login(data));
         }
     }
 }

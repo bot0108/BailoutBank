@@ -14,10 +14,11 @@ namespace BailoutRegister2
 {
     public partial class Login : Form
     {
-        private string connection = "datasource=127.0.0.1;port=8889;username=root;password=root;database=login";
-
-        public Login()
+        private Data data;
+       
+        public Login(Data data)
         {
+            this.data = data;
             InitializeComponent();
         }
 
@@ -28,34 +29,24 @@ namespace BailoutRegister2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn = new MySqlConnection(connection);
-            conn.Open();
-            string user = uname.Text;
-            string pass = pword.Text;
-            MySqlDataAdapter sda = new MySqlDataAdapter($"SELECT Count(*) From basic where user='" + user + "' and pass='" + pass +"'",conn);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            if (dt.Rows[0][0].ToString()=="1")
+            if (data.ValidateLogin(uname.Text, pword.Text))
             {
-                this.Hide();
-                Main ss = new Main();
-                ss.Show();
+                Console.WriteLine("ok");
+                MessageBox.Show("Login successful!");
 
             }
             else
             {
-                MessageBox.Show("Check credentials");
+                Console.WriteLine("ok");
+                MessageBox.Show("Invalid username or password.");
             }
-            /*string query = $"INSERT INTO basic(user,pass)" + $"VALUES('{user}'," + $"'{pass}');";
-            MySqlCommand command = new MySqlCommand(query, conn);
-            int result = command.ExecuteNonQuery();*/
-           /* this.Hide();
-            Main ss= new Main();
-            ss.Show();*/
-
-            
         }
-
+        /*string query = $"INSERT INTO basic(user,pass)" + $"VALUES('{user}'," + $"'{pass}');";
+        MySqlCommand command = new MySqlCommand(query, conn);
+        int result = command.ExecuteNonQuery();*/
+        /* this.Hide();
+         Main ss= new Main();
+         ss.Show();*/
         private string uname_TextChanged(object sender, EventArgs e)
         {
             string monke = "monke";
@@ -67,6 +58,8 @@ namespace BailoutRegister2
             this.Close();
         }
 
-        
     }
+
+        
 }
+
