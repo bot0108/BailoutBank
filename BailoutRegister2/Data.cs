@@ -31,7 +31,7 @@ namespace BailoutRegister2
         {
                 try
                 {
-                    connection.Open();
+                    
 
                     // Check if the username already exists
 

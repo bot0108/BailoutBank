@@ -31,13 +31,11 @@ namespace BailoutRegister2
         {
             if (data.ValidateLogin(uname.Text, pword.Text))
             {
-                Console.WriteLine("ok");
                 MessageBox.Show("Login successful!");
 
             }
             else
             {
-                Console.WriteLine("ok");
                 MessageBox.Show("Invalid username or password.");
             }
         }
