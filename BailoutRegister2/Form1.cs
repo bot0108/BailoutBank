@@ -39,17 +39,6 @@ namespace BailoutRegister2
                 MessageBox.Show("Invalid username or password.");
             }
         }
-        /*string query = $"INSERT INTO basic(user,pass)" + $"VALUES('{user}'," + $"'{pass}');";
-        MySqlCommand command = new MySqlCommand(query, conn);
-        int result = command.ExecuteNonQuery();*/
-        /* this.Hide();
-         Main ss= new Main();
-         ss.Show();*/
-        private string uname_TextChanged(object sender, EventArgs e)
-        {
-            string monke = "monke";
-            return monke;
-        }
 
         private void closer_Click(object sender, EventArgs e)
         {

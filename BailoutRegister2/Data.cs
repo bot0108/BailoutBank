@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySqlConnector;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace BailoutRegister2
 {
@@ -20,18 +21,21 @@ namespace BailoutRegister2
 
         public bool ValidateLogin(string email, string password)
         {
-            
-            string query = "SELECT COUNT(*) FROM users WHERE email=" + email + " AND password=" + password + ";";
+
+            string query = "SELECT COUNT(*) FROM users WHERE email = @Email AND password = @Password";
             MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@Password", password);
+
             int count = Convert.ToInt32(command.ExecuteScalar());
-            return count > 0;         
+            return count > 0;
         }
 
         /*public bool Register(string email, string password, string firstname, string lastname, int dob, int gender_id)
         {
                 try
                 {
-                    
+                    connection.Open();
 
                     // Check if the username already exists
 
