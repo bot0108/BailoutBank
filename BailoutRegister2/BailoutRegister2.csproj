@@ -82,6 +82,12 @@
     <Compile Include="csange.Designer.cs">
       <DependentUpon>csange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forgotten.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forgotten.Designer.cs">
+      <DependentUpon>Forgotten.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="csange.resx">
       <DependentUpon>csange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forgotten.resx">
+      <DependentUpon>Forgotten.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

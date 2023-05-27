@@ -134,6 +134,7 @@
             this.button1.TabIndex = 7;
             this.button1.Text = "Log-out";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -144,17 +145,19 @@
             this.button2.Size = new System.Drawing.Size(64, 51);
             this.button2.TabIndex = 8;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.Transparent;
             this.button3.Font = new System.Drawing.Font("Verdana", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button3.Location = new System.Drawing.Point(82, 499);
+            this.button3.Location = new System.Drawing.Point(82, 484);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(142, 61);
+            this.button3.Size = new System.Drawing.Size(199, 76);
             this.button3.TabIndex = 9;
             this.button3.Text = "Create new account";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -166,6 +169,7 @@
             this.button4.TabIndex = 10;
             this.button4.Text = "Loans";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
@@ -173,10 +177,11 @@
             this.button5.Font = new System.Drawing.Font("Verdana", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button5.Location = new System.Drawing.Point(952, 243);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(237, 34);
+            this.button5.Size = new System.Drawing.Size(237, 86);
             this.button5.TabIndex = 11;
             this.button5.Text = "New Transaction";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // panel1
             // 
@@ -204,6 +209,7 @@
             this.label5.Size = new System.Drawing.Size(85, 28);
             this.label5.TabIndex = 14;
             this.label5.Text = "Name";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // Main
             // 
@@ -226,6 +232,7 @@
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;

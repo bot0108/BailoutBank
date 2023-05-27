@@ -18,6 +18,39 @@ namespace BailoutRegister2
             connection = new MySqlConnection(connectionString);
             connection.Open();
         }
+        public int RegisterValidator(string email)
+        {
+            string query = "SELECT COUNT(*) FROM users WHERE email=@Email;";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@Email", email);
+            int count = Convert.ToInt32(command.ExecuteScalar());
+            if (count > 0)
+            {
+                return 1;
+            }
+            return 0;
+        }
+        public int Register(string email, string password, string firstname, string lastname, DateTime dob, int gender_id)
+        {
+
+            string query = $"INSERT INTO users (firstname, lastname, email, password, dob, gender_id) VALUES (@Firstname, @Lastname, @Email, @Password, @Dob, @Gender_id);";
+            MySqlCommand command = new MySqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@Firstname", firstname);
+            command.Parameters.AddWithValue("@Lastname", lastname);
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@Password", password);
+            command.Parameters.AddWithValue("@Dob", dob);
+            command.Parameters.AddWithValue("@Gender_id", gender_id);
+
+            int rowsAffected = command.ExecuteNonQuery();
+            if (rowsAffected != 1)
+            {
+                return 2;
+            }
+
+            return 0;
+        }
 
         public bool ValidateLogin(string email, string password)
         {
@@ -30,6 +63,27 @@ namespace BailoutRegister2
             int count = Convert.ToInt32(command.ExecuteScalar());
             return count > 0;
         }
+        
+        public bool UpdatePass(string email, string newpassword)
+        {
+            string query = "UPDATE users set password=@Newpassword WHERE email = @Email";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@Newpassword", newpassword);
+            try {
+                int result = command.ExecuteNonQuery();
+                return true;
+
+            }
+            catch(Exception ex) { Console.WriteLine(ex.Message); return false; }
+
+        }
+        /*public bool TerminateAcc(string account_id)
+        {
+            string query = "DELETE * FROM accounts WHERE account_id=@Account_id";
+            MySqlCommand command = new MySqlCommand(query,connection);
+            
+        }*/
 
         /*public bool Register(string email, string password, string firstname, string lastname, int dob, int gender_id)
         {

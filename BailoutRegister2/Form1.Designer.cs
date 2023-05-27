@@ -100,31 +100,33 @@
             // 
             this.button3.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button3.ForeColor = System.Drawing.Color.Black;
-            this.button3.Location = new System.Drawing.Point(45, 264);
+            this.button3.Location = new System.Drawing.Point(18, 264);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 27);
+            this.button3.Size = new System.Drawing.Size(127, 38);
             this.button3.TabIndex = 8;
             this.button3.Text = "Register";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(182, 227);
+            this.button2.Location = new System.Drawing.Point(171, 213);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(120, 52);
+            this.button2.Size = new System.Drawing.Size(149, 89);
             this.button2.TabIndex = 7;
             this.button2.Text = "Forgotten password";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // closer
             // 
             this.closer.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.closer.ForeColor = System.Drawing.Color.Black;
-            this.closer.Location = new System.Drawing.Point(128, 322);
+            this.closer.Location = new System.Drawing.Point(97, 321);
             this.closer.Name = "closer";
-            this.closer.Size = new System.Drawing.Size(100, 32);
+            this.closer.Size = new System.Drawing.Size(131, 33);
             this.closer.TabIndex = 5;
             this.closer.Text = "Close";
             this.closer.UseVisualStyleBackColor = true;
@@ -134,9 +136,9 @@
             // 
             this.button1.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(45, 213);
+            this.button1.Location = new System.Drawing.Point(18, 213);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 27);
+            this.button1.Size = new System.Drawing.Size(127, 35);
             this.button1.TabIndex = 4;
             this.button1.Text = "Login";
             this.button1.UseVisualStyleBackColor = true;
@@ -156,6 +158,7 @@
             this.uname.Name = "uname";
             this.uname.Size = new System.Drawing.Size(257, 22);
             this.uname.TabIndex = 2;
+            this.uname.TextChanged += new System.EventHandler(this.uname_TextChanged);
             // 
             // label3
             // 
@@ -173,11 +176,12 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(124, 34);
+            this.label2.Location = new System.Drawing.Point(140, 32);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 20);
+            this.label2.Size = new System.Drawing.Size(62, 20);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Username";
+            this.label2.Text = "Email";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label1
             // 

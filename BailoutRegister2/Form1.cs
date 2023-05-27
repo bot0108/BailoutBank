@@ -26,13 +26,15 @@ namespace BailoutRegister2
         {
             
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        
+        public void button1_Click(object sender, EventArgs e)
         {
             if (data.ValidateLogin(uname.Text, pword.Text))
             {
                 MessageBox.Show("Login successful!");
-
+                Main mainform = new Main(data);
+                mainform.Show();
+                this.Hide();
             }
             else
             {
@@ -43,8 +45,31 @@ namespace BailoutRegister2
         private void closer_Click(object sender, EventArgs e)
         {
             this.Close();
+            
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Forgotten form2 = new Forgotten(data);
+            form2.Show();
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Register form3 = new Register(data);
+            form3.Show();
+        }
+        public string globalUser = "";
+        private void uname_TextChanged(object sender, EventArgs e)
+        {
+            globalUser += uname.Text;
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
         

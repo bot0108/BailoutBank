@@ -35,18 +35,18 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dob = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.password = new System.Windows.Forms.TextBox();
+            this.conpassword = new System.Windows.Forms.TextBox();
+            this.email = new System.Windows.Forms.TextBox();
+            this.conemail = new System.Windows.Forms.TextBox();
+            this.firstname = new System.Windows.Forms.TextBox();
+            this.lastname = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.gender = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -120,12 +120,12 @@
             this.label6.TabIndex = 6;
             this.label6.Text = "Confirm E-Mail";
             // 
-            // dateTimePicker1
+            // dob
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(437, 386);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(233, 22);
-            this.dateTimePicker1.TabIndex = 7;
+            this.dob.Location = new System.Drawing.Point(437, 386);
+            this.dob.Name = "dob";
+            this.dob.Size = new System.Drawing.Size(233, 22);
+            this.dob.TabIndex = 7;
             // 
             // label7
             // 
@@ -138,49 +138,49 @@
             this.label7.TabIndex = 8;
             this.label7.Text = "Date Of Birth";
             // 
-            // textBox2
+            // password
             // 
-            this.textBox2.Location = new System.Drawing.Point(437, 199);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(165, 22);
-            this.textBox2.TabIndex = 10;
-            this.textBox2.UseSystemPasswordChar = true;
+            this.password.Location = new System.Drawing.Point(437, 199);
+            this.password.Name = "password";
+            this.password.Size = new System.Drawing.Size(165, 22);
+            this.password.TabIndex = 10;
+            this.password.UseSystemPasswordChar = true;
             // 
-            // textBox3
+            // conpassword
             // 
-            this.textBox3.Location = new System.Drawing.Point(655, 199);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(165, 22);
-            this.textBox3.TabIndex = 11;
-            this.textBox3.UseSystemPasswordChar = true;
+            this.conpassword.Location = new System.Drawing.Point(655, 199);
+            this.conpassword.Name = "conpassword";
+            this.conpassword.Size = new System.Drawing.Size(165, 22);
+            this.conpassword.TabIndex = 11;
+            this.conpassword.UseSystemPasswordChar = true;
             // 
-            // textBox4
+            // email
             // 
-            this.textBox4.Location = new System.Drawing.Point(437, 295);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(165, 22);
-            this.textBox4.TabIndex = 12;
+            this.email.Location = new System.Drawing.Point(437, 295);
+            this.email.Name = "email";
+            this.email.Size = new System.Drawing.Size(165, 22);
+            this.email.TabIndex = 12;
             // 
-            // textBox5
+            // conemail
             // 
-            this.textBox5.Location = new System.Drawing.Point(655, 295);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(165, 22);
-            this.textBox5.TabIndex = 13;
+            this.conemail.Location = new System.Drawing.Point(655, 295);
+            this.conemail.Name = "conemail";
+            this.conemail.Size = new System.Drawing.Size(165, 22);
+            this.conemail.TabIndex = 13;
             // 
-            // textBox6
+            // firstname
             // 
-            this.textBox6.Location = new System.Drawing.Point(437, 118);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(165, 22);
-            this.textBox6.TabIndex = 14;
+            this.firstname.Location = new System.Drawing.Point(437, 118);
+            this.firstname.Name = "firstname";
+            this.firstname.Size = new System.Drawing.Size(165, 22);
+            this.firstname.TabIndex = 14;
             // 
-            // textBox7
+            // lastname
             // 
-            this.textBox7.Location = new System.Drawing.Point(655, 118);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(165, 22);
-            this.textBox7.TabIndex = 15;
+            this.lastname.Location = new System.Drawing.Point(655, 118);
+            this.lastname.Name = "lastname";
+            this.lastname.Size = new System.Drawing.Size(165, 22);
+            this.lastname.TabIndex = 15;
             // 
             // label8
             // 
@@ -215,17 +215,17 @@
             this.label10.TabIndex = 18;
             this.label10.Text = "Gender";
             // 
-            // comboBox1
+            // gender
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.gender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.gender.FormattingEnabled = true;
+            this.gender.Items.AddRange(new object[] {
             "Female",
             "Male"});
-            this.comboBox1.Location = new System.Drawing.Point(864, 199);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 19;
+            this.gender.Location = new System.Drawing.Point(864, 199);
+            this.gender.Name = "gender";
+            this.gender.Size = new System.Drawing.Size(121, 24);
+            this.gender.TabIndex = 19;
             // 
             // button1
             // 
@@ -237,6 +237,7 @@
             this.button1.TabIndex = 20;
             this.button1.Text = "Submit";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox2
             // 
@@ -258,18 +259,18 @@
             this.ClientSize = new System.Drawing.Size(1204, 554);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.gender);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.lastname);
+            this.Controls.Add(this.firstname);
+            this.Controls.Add(this.conemail);
+            this.Controls.Add(this.email);
+            this.Controls.Add(this.conpassword);
+            this.Controls.Add(this.password);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dob);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -297,18 +298,18 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dob;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox password;
+        private System.Windows.Forms.TextBox conpassword;
+        private System.Windows.Forms.TextBox email;
+        private System.Windows.Forms.TextBox conemail;
+        private System.Windows.Forms.TextBox firstname;
+        private System.Windows.Forms.TextBox lastname;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox gender;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox2;
     }
