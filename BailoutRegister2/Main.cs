@@ -45,7 +45,7 @@ namespace BailoutRegister2
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Loans loaner = new Loans();
+            Loans loaner = new Loans(data);
             loaner.Show();
         }
 

@@ -32,6 +32,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>BB logo V3.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>BailoutRegister2.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySqlConnector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
       <HintPath>..\packages\MySqlConnector.2.2.6\lib\net471\MySqlConnector.dll</HintPath>
@@ -81,6 +87,12 @@
     </Compile>
     <Compile Include="csange.Designer.cs">
       <DependentUpon>csange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Factor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Factor.Designer.cs">
+      <DependentUpon>Factor.cs</DependentUpon>
     </Compile>
     <Compile Include="Forgotten.cs">
       <SubType>Form</SubType>
@@ -144,6 +156,9 @@
     <EmbeddedResource Include="csange.resx">
       <DependentUpon>csange.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Factor.resx">
+      <DependentUpon>Factor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forgotten.resx">
       <DependentUpon>Forgotten.cs</DependentUpon>
     </EmbeddedResource>
@@ -193,6 +208,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BB logo V3.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("BailoutRegister2")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Definetly a Bank")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("BailoutBoyz LTD")]
 [assembly: AssemblyProduct("BailoutRegister2")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
