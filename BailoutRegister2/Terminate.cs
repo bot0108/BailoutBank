@@ -9,12 +9,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BailoutRegister2
+
 {
+  
     public partial class Terminate : Form
     {
         public Terminate()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -37,6 +37,10 @@ namespace BailoutRegister2
             Create createrform = new Create();
             createrform.Show();
         }
+        public void changeLabelText(string text)
+        {
+            this.label1.Text = text;
+        }
 
         private void label5_Click(object sender, EventArgs e)
         {

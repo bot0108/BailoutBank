@@ -78,12 +78,10 @@ namespace BailoutRegister2
             catch(Exception ex) { Console.WriteLine(ex.Message); return false; }
 
         }
-        /*public bool TerminateAcc(string account_id)
-        {
-            string query = "DELETE * FROM accounts WHERE account_id=@Account_id";
-            MySqlCommand command = new MySqlCommand(query,connection);
-            
-        }*/
+        public bool TerminateAcc(string email) {
+            string query = "";
+        }
+        
 
         /*public bool Register(string email, string password, string firstname, string lastname, int dob, int gender_id)
         {
