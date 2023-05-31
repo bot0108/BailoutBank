@@ -63,7 +63,22 @@ namespace BailoutRegister2
             int count = Convert.ToInt32(command.ExecuteScalar());
             return count > 0;
         }
-        
+        public bool IsActive(string email)
+        {
+            string query = "SELECT act FROM users WHERE email=@Email";
+            MySqlCommand command = new MySqlCommand(query,connection);
+            command.Parameters.AddWithValue("@Email", email);
+            int count = Convert.ToInt32(command.ExecuteScalar());
+            if (count==1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool UpdatePass(string email, string newpassword)
         {
             string query = "UPDATE users set password=@Newpassword WHERE email = @Email";
@@ -78,9 +93,23 @@ namespace BailoutRegister2
             catch(Exception ex) { Console.WriteLine(ex.Message); return false; }
 
         }
-        public bool TerminateAcc(string email) {
-            string query = "";
+        public bool setInactive(string email,string status)
+        {
+            string query = "UPDATE users set act=@Status WHERE email=@Email";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@Status", status);
+            try
+            {
+                int result = command.ExecuteNonQuery();
+                return true;
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); return false; }
         }
+        /*public bool TerminateAcc(string email) {
+            string query = "";
+        }*/
         
 
         /*public bool Register(string email, string password, string firstname, string lastname, int dob, int gender_id)

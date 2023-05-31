@@ -35,7 +35,7 @@ namespace BailoutRegister2
             int randomNumber = random.Next(10000, 100000);
             return randomNumber.ToString();
         }
-        public static string asd = "";
+        public static string globalEmail = "";
         public void button1_Click(object sender, EventArgs e)
         {
             if (data.ValidateLogin(uname.Text, pword.Text))
@@ -43,9 +43,9 @@ namespace BailoutRegister2
                 string sendr = "bailoutbank.info@gmail.com";
                 string sendrpass = "aulwssemgfugozam";
                 string distributedPass = Code();
-                asd += distributedPass;
+                globalEmail += distributedPass;
 
-                if (data.RegisterValidator(uname.Text) == 1)
+                if (data.IsActive(uname.Text)==true)
                 {
                     MailMessage message = new MailMessage();
                     message.From = new MailAddress(sendr);
@@ -71,7 +71,7 @@ namespace BailoutRegister2
                 }
                 else
                 {
-                    MessageBox.Show("Invalid username or password.");
+                    MessageBox.Show("Invalid account!");
                 }
             }
         }

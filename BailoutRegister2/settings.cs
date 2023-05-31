@@ -28,7 +28,7 @@ namespace BailoutRegister2
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Terminate terminator = new Terminate(); 
+            Terminate terminator = new Terminate(data); 
             terminator.Show();
             this.Hide();
         }

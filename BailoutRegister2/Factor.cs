@@ -31,7 +31,7 @@ namespace BailoutRegister2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text==Login.asd.ToString())
+            if (textBox1.Text==Login.globalEmail.ToString())
             {
                 Main mainpage = new Main(data);
                 mainpage.Show();
@@ -39,7 +39,7 @@ namespace BailoutRegister2
             }
             else
             {
-                MessageBox.Show(Login.asd);
+                MessageBox.Show(Login.globalEmail);
             }
         }
 
