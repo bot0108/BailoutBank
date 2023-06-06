@@ -36,11 +36,13 @@ namespace BailoutRegister2
             return randomNumber.ToString();
         }
         public static string globalEmail = "";
+        public static string logMail = "";
         public void button1_Click(object sender, EventArgs e)
         {
             int id = data.ValidateLogin(uname.Text, pword.Text);
             if (id != 0)
             {
+                logMail += uname.Text.ToString();
                 string sendr = "bailoutbank.info@gmail.com";
                 string sendrpass = "aulwssemgfugozam";
                 string distributedPass = Code();

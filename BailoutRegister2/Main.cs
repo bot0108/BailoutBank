@@ -14,11 +14,22 @@ namespace BailoutRegister2
     {
         private Data data;
         private User user;
+        private string username;
+        private string balance;
+        private List<int> transactionsid;
+        private List<int> accountsid;
         public Main(Data data, User user)
         {
+            
             InitializeComponent();
             this.data = data;
             this.user = user;
+
+            username = user.UserName();
+            balance = user.GetBalance();
+            UserNameB.Text = username;
+            UserNameBox.Text = username;
+            BalanceBox.Text = balance;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -39,16 +50,7 @@ namespace BailoutRegister2
             Create createrform = new Create(user);
             createrform.Show();
         }
-        public void changeLabelText(string text)
-        {
-            this.label1.Text = text;
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-            label5.Text = "Boti";
-        }
-
+       
         private void button4_Click(object sender, EventArgs e)
         {
             Loans loaner = new Loans(data);

@@ -35,13 +35,23 @@ namespace BailoutRegister2
         {
             if (textBox1.Text==Login.globalEmail.ToString())
             {
-                Main mainpage = new Main(data, user);
-                mainpage.Show();
-                this.Hide();
+                if (Login.logMail == "bailoutbank.info@gmail.com")
+                {
+                    Administrator adminpage = new Administrator();
+                    adminpage.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show(Login.logMail);
+                    Main mainpage = new Main(data, user);
+                    mainpage.Show();
+                    this.Hide();
+                }
             }
             else
             {
-                MessageBox.Show(Login.globalEmail);
+                MessageBox.Show("Something went wrong");
             }
         }
 

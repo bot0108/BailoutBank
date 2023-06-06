@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySqlConnector;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace BailoutRegister2
@@ -160,9 +162,23 @@ namespace BailoutRegister2
             {
                 return false;
             }
-                
-                
-            }
-
         }
+
+
+        public string GetData(string query)
+        {
+            try
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                string info = command.ExecuteScalar()?.ToString();
+                return info;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("MySQL Exception: " + ex.Message);
+                return "";
+            }
+        }
+
     }
+}
