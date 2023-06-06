@@ -25,14 +25,13 @@ namespace BailoutRegister2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (data.setInactive(Login.globalEmail,"0")==true)
+            if (data.setInactive(Login.logMail,"0")==true)
             {
                 MessageBox.Show("Account deleted successfully!");
                 this.Hide();
-
                 
-                Main mainpage = new Main(data, user);
-                mainpage.Hide();
+                
+                
                 Login loginpage = new Login(data);
                 loginpage.Show();
             }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -30,6 +32,7 @@ namespace BailoutRegister2
             UserNameB.Text = username;
             UserNameBox.Text = username;
             BalanceBox.Text = balance;
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -62,5 +65,19 @@ namespace BailoutRegister2
             Transfer transferform = new Transfer();
             transferform.Show();
         }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedImagePath = openFileDialog.FileName;
+
+                pictureBox3.Image = new Bitmap(selectedImagePath);
+            }
+        }
+        
     }
 }
