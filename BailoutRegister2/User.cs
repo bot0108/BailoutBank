@@ -53,7 +53,15 @@ namespace BailoutRegister2
             {
                 string query = $"SELECT SUM(money) FROM accounts WHERE user_id = {ID}";
                 string balance = data.GetData(query);
-                return balance;
+                if (balance == "")
+                {
+                    return "0";
+                }
+                else
+                {
+                    return balance;
+                }
+                
             }
             catch
             {
