@@ -32,7 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.accname = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -78,12 +78,12 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Name of the account";
             // 
-            // textBox1
+            // accname
             // 
-            this.textBox1.Location = new System.Drawing.Point(445, 173);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(246, 22);
-            this.textBox1.TabIndex = 3;
+            this.accname.Location = new System.Drawing.Point(445, 173);
+            this.accname.Name = "accname";
+            this.accname.Size = new System.Drawing.Size(246, 22);
+            this.accname.TabIndex = 3;
             // 
             // label3
             // 
@@ -148,6 +148,7 @@
             this.button1.TabIndex = 9;
             this.button1.Text = "Submit";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox2
             // 
@@ -185,7 +186,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.accname);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
@@ -208,7 +209,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox accname;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

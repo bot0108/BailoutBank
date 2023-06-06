@@ -13,10 +13,12 @@ namespace BailoutRegister2
     public partial class Main : Form
     {
         private Data data;
-        public Main(Data data)
+        private User user;
+        public Main(Data data, User user)
         {
             InitializeComponent();
             this.data = data;
+            this.user = user;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,13 +30,13 @@ namespace BailoutRegister2
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Settings settingsform = new Settings(data);
+            Settings settingsform = new Settings(data, user );
             settingsform.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Create createrform = new Create();
+            Create createrform = new Create(user);
             createrform.Show();
         }
         public void changeLabelText(string text)

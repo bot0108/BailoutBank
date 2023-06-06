@@ -13,10 +13,12 @@ namespace BailoutRegister2
     public partial class Settings : Form
     {
         private Data data;
-        public Settings(Data data)
+        private User user;
+        public Settings(Data data, User user)
         {
             InitializeComponent();
             this.data = data;
+            this.user = user;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,7 +30,7 @@ namespace BailoutRegister2
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Terminate terminator = new Terminate(data); 
+            Terminate terminator = new Terminate(data, user); 
             terminator.Show();
             this.Hide();
         }

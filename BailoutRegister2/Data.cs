@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using MySqlConnector;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
@@ -52,31 +53,50 @@ namespace BailoutRegister2
             return 0;
         }
 
-        public bool ValidateLogin(string email, string password)
+        public int ValidateLogin(string email, string password)
         {
+            try
+            {
+                string query = "SELECT user_id FROM users WHERE email = @Email AND password = @Password";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Email", email);
+                    command.Parameters.AddWithValue("@Password", password);
 
-            string query = "SELECT COUNT(*) FROM users WHERE email = @Email AND password = @Password";
-            MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@Email", email);
-            command.Parameters.AddWithValue("@Password", password);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            int userId = reader.GetInt32("user_id");
+                            return userId;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
 
-            int count = Convert.ToInt32(command.ExecuteScalar());
-            return count > 0;
+            return 0;
+
         }
         public bool IsActive(string email)
         {
             string query = "SELECT act FROM users WHERE email=@Email";
-            MySqlCommand command = new MySqlCommand(query,connection);
-            command.Parameters.AddWithValue("@Email", email);
-            int count = Convert.ToInt32(command.ExecuteScalar());
-            if (count==1)
+            using (MySqlCommand command = new MySqlCommand(query, connection))
             {
-                return true;
+                command.Parameters.AddWithValue("@Email", email);
+
+                object result = command.ExecuteScalar();
+                if (result != null && result != DBNull.Value)
+                {
+                    int count = Convert.ToInt32(result);
+                    return count == 1;
+                }
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public bool UpdatePass(string email, string newpassword)
@@ -107,42 +127,42 @@ namespace BailoutRegister2
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); return false; }
         }
-        /*public bool TerminateAcc(string email) {
-            string query = "";
-        }*/
-        
 
-        /*public bool Register(string email, string password, string firstname, string lastname, int dob, int gender_id)
+        public bool Insert(Dictionary<string, object> parameters, string table)
         {
-                try
-                {
-                    connection.Open();
 
-                    // Check if the username already exists
+            string query = $"INSERT INTO {table} (";
 
-                    string query = "SELECT COUNT(*) FROM users WHERE email=" + email + ";";
-                    MySqlCommand command = new MySqlCommand(query, connection);
-                    int count = (int)command.ExecuteScalar();
-                    if (count > 0)
-                    {
-                        throw new Exception("Username already exists");
-                    }
+            foreach (string columnName in parameters.Keys)
+            {
+                query += columnName + ", ";
+            }
+            query = query.TrimEnd(',', ' ') + ") VALUES (";
 
-                    // Add the new customer
-                    query = $"INSERT INTO users (firstname, lastname, email, password, dob, gender_id) VALUES ({firstname}, {lastname}, {email}, {password}, {dob}, {gender_id})";
-                    command = new MySqlCommand(query, connection);
-                    int rowsAffected = command.ExecuteNonQuery();
-                    if (rowsAffected != 1)
-                    {
-                        throw new Exception("Error adding customer");
-                    }
+            foreach (string columnName in parameters.Keys)
+            {
+                query += "@" + columnName + ", ";
+            }
+            query = query.TrimEnd(',', ' ') + ")";
 
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }*/
+            MySqlCommand command = new MySqlCommand(query, connection);
+
+            foreach (KeyValuePair<string, object> parameter in parameters)
+            {
+                    command.Parameters.AddWithValue("@" + parameter.Key, parameter.Value);
+            }
+            try
+            {
+                int rowsAffected = command.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+                
+                
+            }
+
+        }
     }
-}

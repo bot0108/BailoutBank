@@ -15,10 +15,12 @@ namespace BailoutRegister2
     public partial class Terminate : Form
     {
         private Data data;
-        public Terminate(Data data)
+        private User user;
+        public Terminate(Data data, User user)
         {
             InitializeComponent();
             this.data = data;
+            this.user = user;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -29,7 +31,7 @@ namespace BailoutRegister2
                 this.Hide();
 
                 
-                Main mainpage = new Main(data);
+                Main mainpage = new Main(data, user);
                 mainpage.Hide();
                 Login loginpage = new Login(data);
                 loginpage.Show();

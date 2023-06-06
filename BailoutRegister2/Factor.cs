@@ -13,10 +13,12 @@ namespace BailoutRegister2
     public partial class Factor : Form
     {
         private Data data;
-        public Factor(Data data)
+        private User user;
+        public Factor(Data data, User user)
         {
             InitializeComponent();
             this.data = data;
+            this.user = user;
         }
 
         private void Factor_Load(object sender, EventArgs e)
@@ -33,7 +35,7 @@ namespace BailoutRegister2
         {
             if (textBox1.Text==Login.globalEmail.ToString())
             {
-                Main mainpage = new Main(data);
+                Main mainpage = new Main(data, user);
                 mainpage.Show();
                 this.Hide();
             }

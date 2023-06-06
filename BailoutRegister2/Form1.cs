@@ -38,14 +38,15 @@ namespace BailoutRegister2
         public static string globalEmail = "";
         public void button1_Click(object sender, EventArgs e)
         {
-            if (data.ValidateLogin(uname.Text, pword.Text))
+            int id = data.ValidateLogin(uname.Text, pword.Text);
+            if (id != 0)
             {
                 string sendr = "bailoutbank.info@gmail.com";
                 string sendrpass = "aulwssemgfugozam";
                 string distributedPass = Code();
                 globalEmail += distributedPass;
 
-                if (data.IsActive(uname.Text)==true)
+                if (data.IsActive(uname.Text))
                 {
                     MailMessage message = new MailMessage();
                     message.From = new MailAddress(sendr);
@@ -65,14 +66,20 @@ namespace BailoutRegister2
 
 
                     MessageBox.Show("Login successful!");
-                    Factor authenticator = new Factor(data);
+                    User user = new User(id, data);
+                    Factor authenticator = new Factor(data, user);
                     authenticator.Show();
                     this.Hide();
                 }
                 else
                 {
-                    MessageBox.Show("Invalid account!");
+                    MessageBox.Show("Account is inactive!");
                 }
+
+            }
+            else
+            {
+                MessageBox.Show("Wrong credentials!");
             }
         }
         private void closer_Click(object sender, EventArgs e)
