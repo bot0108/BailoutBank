@@ -43,7 +43,6 @@ namespace BailoutRegister2
                 }
                 else
                 {
-                    MessageBox.Show(Login.logMail);
                     Main mainpage = new Main(data, user);
                     mainpage.Show();
                     this.Hide();
