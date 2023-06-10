@@ -54,6 +54,26 @@ namespace BailoutRegister2
 
             return 0;
         }
+        public bool Updater(string email, string password, string firstname, string lastname, DateTime dob, int gender_id,int user_id)
+        {
+            string query = "UPDATE users set firstname=@Firstname, lastname=@Lastname, email=@Email, password=@Password, dob=@Dob, gender_id=@Gender_id,user_id=@User_Id WHERE user_id=@User_Id;";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@Firstname", firstname);
+            command.Parameters.AddWithValue("@Lastname", lastname);
+            command.Parameters.AddWithValue("@Email", email);
+            command.Parameters.AddWithValue("@Password", password);
+            command.Parameters.AddWithValue("@Dob", dob);
+            command.Parameters.AddWithValue("@Gender_id", gender_id);
+            command.Parameters.AddWithValue("User_Id", user_id);
+            try
+            {
+                int result = command.ExecuteNonQuery();
+                return true;
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); return false; }
+
+        }
 
         public int ValidateLogin(string email, string password)
         {
@@ -115,6 +135,8 @@ namespace BailoutRegister2
             catch(Exception ex) { Console.WriteLine(ex.Message); return false; }
 
         }
+        
+
         public bool setInactive(string email,string status)
         {
             string query = "UPDATE users set act=@Status WHERE email=@Email";
@@ -129,6 +151,20 @@ namespace BailoutRegister2
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); return false; }
         }
+        public bool setInactiveID(int id)
+        {
+            string query = "UPDATE users set act=0 WHERE user_id=@ID";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ID", id);
+            try
+            {
+                int result = command.ExecuteNonQuery();
+                return true;
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); return false; }
+        }
+
 
         public bool Insert(Dictionary<string, object> parameters, string table)
         {
