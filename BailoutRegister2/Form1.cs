@@ -42,11 +42,11 @@ namespace BailoutRegister2
             int id = data.ValidateLogin(uname.Text, pword.Text);
             if (id != 0)
             {
-                logMail += uname.Text.ToString();
+                logMail = uname.Text.ToString();
                 string sendr = "bailoutbank.info@gmail.com";
                 string sendrpass = "aulwssemgfugozam";
                 string distributedPass = Code();
-                globalEmail += distributedPass;
+                globalEmail = distributedPass;
 
                 if (data.IsActive(uname.Text))
                 {

@@ -83,6 +83,7 @@ namespace BailoutRegister2
             return 0;
 
         }
+
         public bool IsActive(string email)
         {
             string query = "SELECT act FROM users WHERE email=@Email";
@@ -173,12 +174,75 @@ namespace BailoutRegister2
                 string info = command.ExecuteScalar()?.ToString();
                 return info;
             }
-            catch (Exception ex)
+            catch (MySqlException ex)
             {
                 Console.WriteLine("MySQL Exception: " + ex.Message);
                 return "";
             }
         }
 
+        public Dictionary<int, List<object>> GetAccounts(string query, int id)
+        {
+            Dictionary<int, List<object>> accountDict = new Dictionary<int, List<object>>();
+
+            try
+            {
+                
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@UserId", id);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        int accountId = reader.GetInt32("account_id");
+                        string accountName = reader.GetString("name");
+                        int balance = reader.GetInt32("money");
+
+                        List<object> accountInfo = new List<object> {accountName, balance };
+
+                        accountDict.Add(accountId, accountInfo);
+                    }
+                    
+                }
+                return accountDict;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return accountDict;
+            }
+            
+        }
+
+        public bool Update(Dictionary<string, object> parameters, string table, string condition)
+        {
+            string query = $"UPDATE {table} SET ";
+
+            foreach (string columnName in parameters.Keys)
+            {
+                query += $"{columnName}=@{columnName}, ";
+            }
+            query = query.TrimEnd(',', ' ') + $" WHERE {condition}";
+
+            using (MySqlCommand command = new MySqlCommand(query, connection))
+            {
+                foreach (KeyValuePair<string, object> parameter in parameters)
+                {
+                    command.Parameters.AddWithValue("@" + parameter.Key, parameter.Value);
+                }
+                try
+                {
+                    int rowsAffected = command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("MySQL Exception: " + ex.Message);
+                    return false;
+                }
+            }
+            
+        }
     }
 }

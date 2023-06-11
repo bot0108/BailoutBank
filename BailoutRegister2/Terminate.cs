@@ -30,9 +30,6 @@ namespace BailoutRegister2
                 MessageBox.Show("Account deleted successfully!");
                 this.Hide();
 
-                
-                Main mainpage = new Main(data, user);
-                mainpage.Hide();
                 Login loginpage = new Login(data);
                 loginpage.Show();
             }

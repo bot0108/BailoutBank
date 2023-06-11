@@ -41,8 +41,9 @@ namespace BailoutRegister2
                 string name = data.GetData(query);
                 return name;
             }
-            catch
+            catch(Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return "";
             }            
         }
@@ -63,12 +64,20 @@ namespace BailoutRegister2
                 }
                 
             }
-            catch
+            catch(Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return "";
             }
         }
 
+        public Dictionary<int, List<object>> GetAccountData()
+        {
+            Dictionary<int, List<object>> accountData = new Dictionary<int, List<object>>();
+            string query = "SELECT account_id, name, money FROM accounts WHERE user_id = @UserId";
+            accountData = data.GetAccounts(query, ID);
+            return accountData;
+        }
         
     }
 }
