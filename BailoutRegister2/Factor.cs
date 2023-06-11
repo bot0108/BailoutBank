@@ -37,7 +37,7 @@ namespace BailoutRegister2
             {
                 if (Login.logMail == "bailoutbank.info@gmail.com")
                 {
-                    Administrator adminpage = new Administrator();
+                    Admin adminpage = new Admin(data);
                     adminpage.Show();
                     this.Hide();
                 }

@@ -26,5 +26,8 @@ namespace BailoutRegister2.Properties
                 return defaultInstance;
             }
         }
+
+        public string SelectedImagePath { get; internal set; }
+        public byte[] SelectedImageBytes { get; internal set; }
     }
 }
