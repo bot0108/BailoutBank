@@ -98,6 +98,7 @@ namespace BailoutRegister2
         }
         private void Main_Load(object sender, EventArgs e)
         {
+
             username = user.UserName();
             if (account == null)
             {
@@ -122,40 +123,47 @@ namespace BailoutRegister2
                 }
             }
 
-
-
-            accountData = user.GetAccountData();
-
-            accountPanel.FlowDirection = FlowDirection.TopDown;
-            accountPanel.WrapContents = false;
-            accountPanel.AutoScroll = true;
-            int k = accountPanel.ClientSize.Width;
-            if (accountData.Count > 6)
+            Dictionary<int, List<object>> accountDataFull = user.GetAccountDataFull();
+            try
             {
-                k = accountPanel.Width - SystemInformation.VerticalScrollBarWidth - 7;
+                accountData = user.GetAccountData();
+
+                accountPanel.FlowDirection = FlowDirection.TopDown;
+                accountPanel.WrapContents = false;
+                accountPanel.AutoScroll = true;
+                int k = accountPanel.ClientSize.Width;
+                if (accountData.Count > 6)
+                {
+                    k = accountPanel.Width - SystemInformation.VerticalScrollBarWidth - 7;
+                }
+                foreach (KeyValuePair<int, List<object>> account in accountData)
+                {
+                    int accountId = account.Key;
+                    List<object> accountInfo = account.Value;
+                    string accountNumber = (string)accountInfo[0];
+                    decimal balance = Convert.ToDecimal(accountInfo[1]);
+
+                    Button button = new Button();
+
+                    button.AutoSize = false;
+                    button.Width = accountPanel.Width - SystemInformation.VerticalScrollBarWidth - 7;
+
+
+                    button.Text = $"{accountNumber}#{accountId} : {balance}$";
+                    button.Name = $"btnAccount_{accountId}";
+                    button.Tag = accountId;
+
+                    button.Click += Button_Click;
+
+                    // Add the button to the panel or any other container
+                    accountPanel.Controls.Add(button);
+                }
             }
-            foreach (KeyValuePair<int, List<object>> account in accountData)
+            catch (Exception ex)
             {
-                int accountId = account.Key;
-                List<object> accountInfo = account.Value;
-                string accountNumber = (string)accountInfo[0];
-                decimal balance = Convert.ToDecimal(accountInfo[1]);
-               
-                Button button = new Button();
-
-                button.AutoSize = false;
-                button.Width = accountPanel.Width - SystemInformation.VerticalScrollBarWidth - 7;
-                
-
-                button.Text = $"{accountNumber}#{accountId} : {balance}$";
-                button.Name = $"btnAccount_{accountId}";
-                button.Tag = accountId;
-
-                button.Click += Button_Click;
-
-                // Add the button to the panel or any other container
-                accountPanel.Controls.Add(button);
+                Console.WriteLine(ex.Message);
             }
+            
 
             if (acco)
             {
@@ -165,59 +173,69 @@ namespace BailoutRegister2
             {
                 transData = account.GetTransData();
             }
+
+            Console.WriteLine(transData.Keys);
+
             //Sort the transactions by date
-            
+
             var sortedTransactions = transData.OrderBy(t => ((DateTime)t.Value[4]));
 
-                try
+
+            try
+            { 
+                transpanel.FlowDirection = FlowDirection.TopDown;
+                transpanel.AutoScroll = true;
+                transpanel.Margin = new Padding(10);
+                    
+                foreach (KeyValuePair<int, List<object>> transaction in transData)
                 {
-                    transpanel.FlowDirection = FlowDirection.TopDown;
-                    transpanel.AutoScroll = true;
-                    transpanel.Margin = new Padding(10);
-                    foreach (var transaction in sortedTransactions)
+                    Console.WriteLine(-1);
+                    int transactionId = (int)transaction.Key;
+                    Console.WriteLine(0);
+                    int accountId = (int)transaction.Value[0];
+                    Console.WriteLine(1);
+                    int person = (int)transaction.Value[1];
+                    Console.WriteLine(2);
+                    decimal money = Convert.ToDecimal(transaction.Value[2]);
+                    Console.WriteLine(3);
+                    string message = (string)transaction.Value[3];
+                    Console.WriteLine(4);
+                    DateTime date = (DateTime)transaction.Value[4];
+
+                    Button button = new Button();
+
+                    button.AutoSize = false;
+                    button.Width = transpanel.Width - SystemInformation.VerticalScrollBarWidth - 7;
+
+                    Transaction trans = new Transaction(transactionId);
+                    List<string> names = trans.GetNames();
+                    if (accountDataFull.Keys.Contains(accountId) & accountDataFull.Keys.Contains(person))
                     {
-
-                        int transactionId = (int)transaction.Key;
-                        int accountId = (int)transaction.Value[0];
-                        int person = (int)transaction.Value[1];
-                        decimal money = Convert.ToDecimal(transaction.Value[2]);
-                        string message = (string)transaction.Value[3];
-                        DateTime date = (DateTime)transaction.Value[4];
-
-                        Button button = new Button();
-
-                        button.AutoSize = false;
-                        button.Width = transpanel.Width - SystemInformation.VerticalScrollBarWidth - 7;
-
-                        Transaction trans = new Transaction(transactionId);
-                        List<string> names = trans.GetNames();
-                        if (accountData.Keys.Contains(accountId) & accountData.Keys.Contains(person))
+                        button.Text = $"From: {accountDataFull[accountId][0]}#{accountId}    To: {accountDataFull[person][0]}#{person}    Amount: {money}$";
+                    }
+                    else
+                    {
+                        if (accountDataFull.Keys.Contains(accountId))
                         {
-                            button.Text = $"From: {accountData[accountId][0]}#{accountId}    To: {accountData[person][0]}#{person}    Amount: {money}$";
+                                button.Text = $"To: {names[1]}      Account: -{money}$";
                         }
                         else
                         {
-                            if (accountData.Keys.Contains(accountId))
-                            {
-                                button.Text = $"To: {names[1]}      Account: -{money}$";
-                            }
-                            else
-                            {
                                 button.Text = $"From: {names[0]}      Account: +{money}$";
-                            }
                         }
-
-                        button.Tag = transactionId; // Store the account ID in the Tag property of the button
-                        button.Click += Button_Click2; // Attach the event handler
-
-                        transpanel.Controls.Add(button);
-
                     }
+
+                    button.Tag = transactionId; // Store the account ID in the Tag property of the button
+                    button.Click += Button_Click2; // Attach the event handler
+
+                    transpanel.Controls.Add(button);
+
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             
             
             

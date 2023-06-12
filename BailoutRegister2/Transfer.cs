@@ -56,7 +56,7 @@ namespace BailoutRegister2
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Check the input!");
+                                    MessageBox.Show("Check the input!1");
                                 }
                                 
                             }
@@ -90,5 +90,6 @@ namespace BailoutRegister2
                 from.Items.Add($"{accountNumber}#{accountId} : {balance}$");
             }
         }
+
     }
 }

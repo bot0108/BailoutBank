@@ -42,6 +42,13 @@
             this.money = new System.Windows.Forms.TextBox();
             this.from = new System.Windows.Forms.ComboBox();
             this.mySqlCommand1 = new MySqlConnector.MySqlCommand();
+            this.autotransactionbox = new System.Windows.Forms.CheckBox();
+            this.start_dob = new System.Windows.Forms.DateTimePicker();
+            this.end_dob = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.freque = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,7 +115,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Verdana", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.Location = new System.Drawing.Point(697, 537);
+            this.button1.Location = new System.Drawing.Point(625, 552);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(168, 44);
             this.button1.TabIndex = 8;
@@ -118,9 +125,9 @@
             // 
             // message
             // 
-            this.message.Location = new System.Drawing.Point(904, 180);
+            this.message.Location = new System.Drawing.Point(888, 111);
             this.message.Name = "message";
-            this.message.Size = new System.Drawing.Size(267, 103);
+            this.message.Size = new System.Drawing.Size(258, 83);
             this.message.TabIndex = 9;
             this.message.Text = "";
             // 
@@ -129,7 +136,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.Location = new System.Drawing.Point(908, 111);
+            this.label5.Location = new System.Drawing.Point(882, 72);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(160, 36);
             this.label5.TabIndex = 10;
@@ -169,12 +176,91 @@
             this.mySqlCommand1.Transaction = null;
             this.mySqlCommand1.UpdatedRowSource = System.Data.UpdateRowSource.None;
             // 
+            // autotransactionbox
+            // 
+            this.autotransactionbox.AutoSize = true;
+            this.autotransactionbox.BackColor = System.Drawing.Color.Transparent;
+            this.autotransactionbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.autotransactionbox.Location = new System.Drawing.Point(858, 234);
+            this.autotransactionbox.Name = "autotransactionbox";
+            this.autotransactionbox.Size = new System.Drawing.Size(272, 29);
+            this.autotransactionbox.TabIndex = 14;
+            this.autotransactionbox.Text = "Make Auto - Transaction";
+            this.autotransactionbox.UseVisualStyleBackColor = false;
+            // 
+            // start_dob
+            // 
+            this.start_dob.Location = new System.Drawing.Point(858, 320);
+            this.start_dob.Name = "start_dob";
+            this.start_dob.Size = new System.Drawing.Size(233, 22);
+            this.start_dob.TabIndex = 15;
+            // 
+            // end_dob
+            // 
+            this.end_dob.Location = new System.Drawing.Point(858, 396);
+            this.end_dob.Name = "end_dob";
+            this.end_dob.Size = new System.Drawing.Size(233, 22);
+            this.end_dob.TabIndex = 16;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold);
+            this.label6.Location = new System.Drawing.Point(853, 292);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(161, 25);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Starting Date";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold);
+            this.label7.Location = new System.Drawing.Point(853, 368);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(148, 25);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "Ending Date";
+            // 
+            // freque
+            // 
+            this.freque.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.freque.FormattingEnabled = true;
+            this.freque.Items.AddRange(new object[] {
+            "Weekly",
+            "Monthly",
+            "Yearly"});
+            this.freque.Location = new System.Drawing.Point(858, 476);
+            this.freque.Name = "freque";
+            this.freque.Size = new System.Drawing.Size(233, 24);
+            this.freque.TabIndex = 19;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold);
+            this.label8.Location = new System.Drawing.Point(853, 448);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(128, 25);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "Frequency";
+            // 
             // Transfer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1204, 608);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.freque);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.end_dob);
+            this.Controls.Add(this.start_dob);
+            this.Controls.Add(this.autotransactionbox);
             this.Controls.Add(this.from);
             this.Controls.Add(this.money);
             this.Controls.Add(this.textBox123);
@@ -215,5 +301,12 @@
         private System.Windows.Forms.TextBox money;
         private System.Windows.Forms.ComboBox from;
         private MySqlConnector.MySqlCommand mySqlCommand1;
+        private System.Windows.Forms.CheckBox autotransactionbox;
+        private System.Windows.Forms.DateTimePicker start_dob;
+        private System.Windows.Forms.DateTimePicker end_dob;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox freque;
+        private System.Windows.Forms.Label label8;
     }
 }

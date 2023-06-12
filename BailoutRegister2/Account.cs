@@ -81,14 +81,14 @@ namespace BailoutRegister2
 
                     if (l)
                     {
-                        parameters = new Dictionary<string, object>
-                    {
-                        {"account_id", AccountId },
-                        {"person", to },
-                        {"money", amount },
-                        {"message", message },
-                        {"date", DateTime.Now}
-                    };
+                            parameters = new Dictionary<string, object>
+                        {
+                            {"account_id", AccountId },
+                            {"person", to },
+                            {"money", amount },
+                            {"message", message },
+                            {"date", DateTime.Now}
+                        };
 
                         // Pass the table name, and parameters to the database class
                         k = data.Insert(parameters, "transactions");
@@ -176,7 +176,7 @@ namespace BailoutRegister2
             string query = $"SELECT act FROM accounts WHERE account_id={AccountId}";
             try
             {
-                if (data.GetData(query) == "1")
+                if (data.AccActive(query))
                 {
                     return true;
                 }

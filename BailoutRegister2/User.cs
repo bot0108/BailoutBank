@@ -81,6 +81,15 @@ namespace BailoutRegister2
             accountData = data.GetAccounts(query, ID);
             return accountData;
         }
+
+        public Dictionary<int, List<object>> GetAccountDataFull()
+        {
+            Dictionary<int, List<object>> accountData = new Dictionary<int, List<object>>();
+            string query = "SELECT account_id, name, money FROM accounts WHERE user_id = @UserId";
+            accountData = data.GetAccounts(query, ID);
+            return accountData;
+        }
+
         public Dictionary<int, List<object>> GetTransData()
         {
             Dictionary<int, List<object>> transData = new Dictionary<int, List<object>>();

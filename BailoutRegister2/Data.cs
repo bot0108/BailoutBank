@@ -220,6 +220,28 @@ namespace BailoutRegister2
                 return "";
             }
         }
+        public bool AccActive(string query)
+        {
+            try
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                object result = command.ExecuteScalar();
+                if (result != null && result != DBNull.Value)
+                {
+                    int count = Convert.ToInt32(result);
+                    return count == 1;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("MySQL Exception: " + ex.Message);
+                return false;
+            }
+        }
         public byte[] GetImage(string query)
         {
             try
