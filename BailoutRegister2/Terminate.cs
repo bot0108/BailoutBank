@@ -29,17 +29,6 @@ namespace BailoutRegister2
             {
                 MessageBox.Show("Account deleted successfully!");
                 this.Hide();
-                
-                
-                
-                mainpage.Hide();
-                mainpage.Hide();
-                mainpage.Hide();
-                mainpage.Hide();
-                mainpage.Hide();
-                mainpage.Hide();
-                mainpage.Hide();
-                mainpage.Hide();
                 Login loginpage = new Login(data);
                 loginpage.Show();
             }
