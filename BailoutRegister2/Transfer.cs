@@ -26,6 +26,10 @@ namespace BailoutRegister2
             {
                 
             }
+            else if (from.Text.Split(':')[0].Split('#')[1] == to.Text.Split('#')[1])
+            {
+
+            }
             else 
             {
                 try

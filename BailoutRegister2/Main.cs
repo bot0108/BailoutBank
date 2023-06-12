@@ -186,7 +186,9 @@ namespace BailoutRegister2
                 transpanel.FlowDirection = FlowDirection.TopDown;
                 transpanel.AutoScroll = true;
                 transpanel.Margin = new Padding(10);
-                    
+                transpanel.WrapContents = false;
+                transpanel.AutoScroll = true;
+
                 foreach (KeyValuePair<int, List<object>> transaction in transData)
                 {
                     Console.WriteLine(-1);
