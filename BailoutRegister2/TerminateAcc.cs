@@ -13,11 +13,13 @@ namespace BailoutRegister2
     public partial class TerminateAcc : Form
     {
         User user;
+        Main main;
         List<int> accountIDs = new List<int>();
-        public TerminateAcc(User user)
+        public TerminateAcc(User user, Main main)
         {
             InitializeComponent();
             this.user = user;
+            this.main = main;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -48,7 +50,11 @@ namespace BailoutRegister2
 
                         acc.DeleteAccount();
                         MessageBox.Show("Account terminated");
-                        this.Hide();
+                        main.Close();
+
+                        Main main1 = new Main(user);
+                        main1.Show();
+                        this.Close();
                     }
                     
                 }

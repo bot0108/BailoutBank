@@ -16,7 +16,7 @@ namespace BailoutRegister2
 {
     public partial class Main : Form
     {
-        private Data data;
+        private Data data = new Data();
         private User user;
         private Account account;
         private string username;
@@ -25,10 +25,10 @@ namespace BailoutRegister2
         private Dictionary<int, List<object>> transData;
         private bool acco = false;
         private byte[] picture;
-        public Main(Data data, User user, Account acc = null) 
-        { 
+        public Main(User user, Account acc = null) 
+        {
+            data.Initialize();
             InitializeComponent();
-            this.data = data;
             this.user = user;
             if (acc == null)
             {
@@ -43,7 +43,7 @@ namespace BailoutRegister2
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Login loginform = new Login(data);
+            Login loginform = new Login();
             loginform.Show();
         }
 
@@ -93,7 +93,7 @@ namespace BailoutRegister2
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            Transfer transferform = new Transfer(user);
+            Transfer transferform = new Transfer(user, this);
             transferform.Show();
         }
         private void Main_Load(object sender, EventArgs e)
@@ -248,7 +248,7 @@ namespace BailoutRegister2
             Button clickedButton = (Button)sender;
             int accountId = (int)clickedButton.Tag;
             Account acc = new Account(accountId);
-            Main main = new Main(data, user, acc);
+            Main main = new Main(user, acc);
             this.Hide();
             main.Show();
         }
@@ -263,7 +263,7 @@ namespace BailoutRegister2
 
         private void UserNameB_Click(object sender, EventArgs e)
         {
-            Main main = new Main(data, user);
+            Main main = new Main(user);
             main.Show();
             this.Hide();
 
@@ -271,7 +271,7 @@ namespace BailoutRegister2
 
         private void UserNameBox_Click(object sender, EventArgs e)
         {
-            Main main = new Main(data, user);
+            Main main = new Main(user);
             main.Show();
             this.Hide();
         }

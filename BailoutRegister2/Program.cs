@@ -18,7 +18,7 @@ namespace BailoutRegister2
             data.Initialize();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login(data));
+            Application.Run(new Login());
         }
     }
 }

@@ -56,7 +56,7 @@ namespace BailoutRegister2
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Login loginpage = new Login(data);
+            Login loginpage = new Login();
             loginpage.Show();
             this.Hide();
         }

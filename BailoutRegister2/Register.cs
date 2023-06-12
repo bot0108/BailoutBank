@@ -14,11 +14,11 @@ namespace BailoutRegister2
 {
     public partial class Register : Form
     {
-        private Data data;
-        public Register(Data data)
+        private Data data = new Data();
+        public Register()
         {
+            data.Initialize();
             InitializeComponent();
-            this.data = data;
         }
 
         private void button1_Click(object sender, EventArgs e)

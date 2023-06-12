@@ -30,7 +30,7 @@ namespace BailoutRegister2
                 MessageBox.Show("Account deleted successfully!");
                 this.Close();
                 main.Close();
-                Login loginpage = new Login(data);
+                Login loginpage = new Login();
                 loginpage.Show();
             }
             else

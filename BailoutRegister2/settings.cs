@@ -39,7 +39,7 @@ namespace BailoutRegister2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            TerminateAcc acc = new TerminateAcc(user);
+            TerminateAcc acc = new TerminateAcc(user, main);
             acc.Show();
             this.Hide();
         }

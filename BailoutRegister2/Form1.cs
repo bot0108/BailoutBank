@@ -17,11 +17,11 @@ namespace BailoutRegister2
 {
     public partial class Login : Form
     {
-        private Data data;
+        private Data data = new Data();
 
-        public Login(Data data)
+        public Login()
         {
-            this.data = data;
+            data.Initialize();
             InitializeComponent();
         }
 
@@ -99,7 +99,7 @@ namespace BailoutRegister2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Register form3 = new Register(data);
+            Register form3 = new Register();
             form3.Show();
         }
 

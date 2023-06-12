@@ -14,10 +14,12 @@ namespace BailoutRegister2
     public partial class Transfer : Form
     {
         User user;
-        public Transfer(User user)
+        Main main;
+        public Transfer(User user, Main main)
         {
             InitializeComponent();
             this.user = user;
+            this.main = main;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -26,7 +28,7 @@ namespace BailoutRegister2
             {
                 
             }
-            else if (from.Text.Split(':')[0].Split('#')[1] == to.Text.Split('#')[1])
+            else if ((from.Text.Split(':')[0].Split('#')[1] == to.Text.Split('#')[1])||(Convert.ToDecimal(money.Text) < 0))
             {
 
             }
@@ -56,18 +58,21 @@ namespace BailoutRegister2
                                 {
                                     account.MakeTransaction(Convert.ToInt32(to.Text.Split('#')[1]), Convert.ToDecimal(money.Text), message.Text);
                                     MessageBox.Show("Transaction was successful");
+                                    main.Hide();
+                                    Main main1 = new Main(user);
                                     this.Hide();
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Check the input!1");
+                                    MessageBox.Show("Check the input!");
                                 }
                                 
                             }
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Check the input! something wrong");
+                            Console.WriteLine(ex.Message);
+                            MessageBox.Show("Check the input!");
                         }
 
                     }
