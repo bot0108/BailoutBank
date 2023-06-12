@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -116,10 +117,10 @@ namespace BailoutRegister2
                     {
                         newBalance = Balance + amount;
                         parameters = new Dictionary<string, object>
-                    {
-                        {"account_id", AccountId },
-                        {"money", newBalance }
-                    };
+                        {
+                            {"account_id", AccountId },
+                            {"money", newBalance }
+                        };
                         k = data.Update(parameters, "accounts", $"account_id = {to}");
                     }
                 }
@@ -190,6 +191,19 @@ namespace BailoutRegister2
                 Console.WriteLine(ex.Message); 
                 return false; 
             }
+        }
+        public void MakeAutoTransaction(int person, decimal amount, DateTime start, DateTime end, string frequency)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                            {"account_id", AccountId },
+                            {"frequency", frequency },
+                            {"money", amount },
+                            {"start_date", start},
+                            {"end_date", end},
+                            {"account_id2", person },
+            };
+            data.Insert(parameters, "autotrans");
         }
     }
 }

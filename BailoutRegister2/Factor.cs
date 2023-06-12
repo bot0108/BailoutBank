@@ -43,7 +43,7 @@ namespace BailoutRegister2
                 }
                 else
                 {
-                    Main mainpage = new Main(data, user);
+                    Main mainpage = new Main(user);
                     mainpage.Show();
                     this.Hide();
                 }
