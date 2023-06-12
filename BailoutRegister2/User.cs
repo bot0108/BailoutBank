@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace BailoutRegister2
 {
     public class User
     {
-        private Data data;
+        private Data data = new Data();
         public int ID { get; set; }
 
-        public User(int id, Data data)
+        public User(int id)
         {
             ID = id;
-            this.data = data;
+            data.Initialize();
         }
 
         public bool CreateAccount(string name, int type)
@@ -74,10 +77,58 @@ namespace BailoutRegister2
         public Dictionary<int, List<object>> GetAccountData()
         {
             Dictionary<int, List<object>> accountData = new Dictionary<int, List<object>>();
-            string query = "SELECT account_id, name, money FROM accounts WHERE user_id = @UserId";
+            string query = "SELECT account_id, name, money FROM accounts WHERE user_id = @UserId AND act = 1";
             accountData = data.GetAccounts(query, ID);
             return accountData;
         }
-        
+        public Dictionary<int, List<object>> GetTransData()
+        {
+            Dictionary<int, List<object>> transData = new Dictionary<int, List<object>>();
+            string query = "SELECT * FROM transactions WHERE account_id IN ( SELECT account_id FROM accounts WHERE user_id = @Id ) OR person IN ( SELECT account_id FROM accounts WHERE user_id = @Id );";
+
+            transData = data.GetTransactions(query, ID);
+            return transData;
+        }
+
+        public bool UploadPicture(byte[] imageData)
+        {
+            try
+            {
+                string table = "users";
+                string condition = $"user_id = {ID}";
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    {"picture", imageData }
+                };
+                if (data.Update(parameters, table, condition))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public byte[] GetPicture()
+        {
+            try
+            {
+                string query = $"SELECT picture FROM users WHERE user_id = {ID}";
+                byte[] picture = data.GetImage(query);
+                return picture;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
     }
 }

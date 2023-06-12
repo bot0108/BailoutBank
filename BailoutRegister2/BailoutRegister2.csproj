@@ -81,8 +81,9 @@
     <Compile Include="Admin.Designer.cs">
       <DependentUpon>Admin.cs</DependentUpon>
     </Compile>
-	  <Compile Include="Account.cs" />
-	  <Compile Include="Data.cs" />
+    <Compile Include="Account.cs" />
+    <Compile Include="Transaction.cs" />
+    <Compile Include="Data.cs" />
     <Compile Include="Create.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,11 +114,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Administrator.cs">
+    <Compile Include="TransactionInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Administrator.Designer.cs">
-      <DependentUpon>Administrator.cs</DependentUpon>
+    <Compile Include="TransactionInfo.Designer.cs">
+      <DependentUpon>TransactionInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Loans.cs">
       <SubType>Form</SubType>
@@ -162,6 +163,12 @@
     </Compile>
     <Compile Include="Transfer.Designer.cs">
       <DependentUpon>Transfer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TerminateAcc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TerminateAcc.Designer.cs">
+      <DependentUpon>TerminateAcc.cs</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
     <EmbeddedResource Include="Admin.resx">
@@ -209,8 +216,14 @@
     <EmbeddedResource Include="Terms.resx">
       <DependentUpon>Terms.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TransactionInfo.resx">
+      <DependentUpon>TransactionInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Transfer.resx">
       <DependentUpon>Transfer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TerminateAcc.resx">
+      <DependentUpon>TerminateAcc.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

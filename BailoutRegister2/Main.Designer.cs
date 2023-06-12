@@ -40,10 +40,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.UserNameBox = new System.Windows.Forms.Label();
             this.BalanceBox = new System.Windows.Forms.Label();
             this.accountPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.transpanel = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -125,6 +125,7 @@
             this.UserNameB.Size = new System.Drawing.Size(63, 20);
             this.UserNameB.TabIndex = 6;
             this.UserNameB.Text = "Name";
+            this.UserNameB.Click += new System.EventHandler(this.UserNameB_Click);
             // 
             // button1
             // 
@@ -173,14 +174,6 @@
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Transparent;
-            this.panel2.Location = new System.Drawing.Point(321, 226);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(526, 334);
-            this.panel2.TabIndex = 13;
-            // 
             // UserNameBox
             // 
             this.UserNameBox.AutoSize = true;
@@ -192,6 +185,7 @@
             this.UserNameBox.Size = new System.Drawing.Size(85, 28);
             this.UserNameBox.TabIndex = 14;
             this.UserNameBox.Text = "Name";
+            this.UserNameBox.Click += new System.EventHandler(this.UserNameBox_Click);
             // 
             // BalanceBox
             // 
@@ -211,16 +205,24 @@
             this.accountPanel.Size = new System.Drawing.Size(231, 203);
             this.accountPanel.TabIndex = 16;
             // 
+            // transpanel
+            // 
+            this.transpanel.BackColor = System.Drawing.Color.Transparent;
+            this.transpanel.Location = new System.Drawing.Point(321, 203);
+            this.transpanel.Name = "transpanel";
+            this.transpanel.Size = new System.Drawing.Size(536, 314);
+            this.transpanel.TabIndex = 17;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1228, 608);
+            this.Controls.Add(this.transpanel);
             this.Controls.Add(this.accountPanel);
             this.Controls.Add(this.BalanceBox);
             this.Controls.Add(this.UserNameBox);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -260,9 +262,9 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label UserNameBox;
         private System.Windows.Forms.Label BalanceBox;
         private System.Windows.Forms.FlowLayoutPanel accountPanel;
+        private System.Windows.Forms.FlowLayoutPanel transpanel;
     }
 }

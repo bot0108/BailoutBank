@@ -14,12 +14,10 @@ namespace BailoutRegister2
     public partial class Transfer : Form
     {
         User user;
-        Data data;
-        public Transfer(User user, Data data)
+        public Transfer(User user)
         {
             InitializeComponent();
             this.user = user;
-            this.data = data;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,18 +40,28 @@ namespace BailoutRegister2
                         try
                         {
                             int accountId = Convert.ToInt32(from.Text.Split(':')[0].Split('#')[1]);
-                            Account account = new Account(accountId, data);
+                            Account account = new Account(accountId);
                             if (account.Balance < Convert.ToDecimal(money.Text))
                             {
                                 MessageBox.Show("Not enough money on account");
                             }
                             else
                             {
-                                account.MakeTransaction(to.Text.Split('#')[1], Convert.ToDecimal(money.Text));
-                                Main main = new Main(data,user);
+                                Account accc = new Account(Convert.ToInt32(to.Text.Split('#')[1]));
+                                if (accc.IsActive())
+                                {
+                                    account.MakeTransaction(Convert.ToInt32(to.Text.Split('#')[1]), Convert.ToDecimal(money.Text), message.Text);
+                                    MessageBox.Show("Transaction was successful");
+                                    this.Hide();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Check the input!");
+                                }
+                                
                             }
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
                             MessageBox.Show("Check the input! something wrong");
                         }
@@ -79,7 +87,7 @@ namespace BailoutRegister2
                 List<object> accountInfo = account.Value;
                 string accountNumber = (string)accountInfo[0];
                 decimal balance = Convert.ToDecimal(accountInfo[1]);
-                from.Items.Add($"{accountNumber}#{accountId}:{balance}");
+                from.Items.Add($"{accountNumber}#{accountId} : {balance}$");
             }
         }
     }

@@ -60,8 +60,9 @@ namespace BailoutRegister2
                 data.UpdatePass(textBox1.Text, distributedPass);
                 if (data.UpdatePass(textBox1.Text, distributedPass) == true){
                     MessageBox.Show("Proceed to your email account!");
-
+                    
                 }
+                
 
                 this.Hide();
 

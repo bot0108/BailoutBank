@@ -21,11 +21,23 @@ namespace BailoutRegister2
         private Account account;
         private string username;
         private string balance;
-        private Account account;
         private Dictionary<int, List<object>> accountData;
-        public Main(Data data, User user, Account acc = null)
-            this.account = acc;
-     
+        private Dictionary<int, List<object>> transData;
+        private bool acco = false;
+        private byte[] picture;
+        public Main(Data data, User user, Account acc = null) 
+        { 
+            InitializeComponent();
+            this.data = data;
+            this.user = user;
+            if (acc == null)
+            {
+                acco = true;
+            }
+            else
+            {
+                this.account = acc;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,7 +49,7 @@ namespace BailoutRegister2
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Settings settingsform = new Settings(data, user);
+            Settings settingsform = new Settings(data, user, this);
             settingsform.Show();
         }
 
@@ -47,67 +59,43 @@ namespace BailoutRegister2
             createrform.Show();
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Loans loaner = new Loans(data);
-            loaner.Show();
-        }
-
-
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            MySqlConnection conn;
-            string connectionString = "datasource=ID386628_testing.db.webhosting.be;port=3306;username=ID386628_testing;password=Qcass2203!;database=ID386628_testing;";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                conn = new MySqlConnection(connectionString);
-                conn.Open();
-
-                // Check if the image already exists in the database
-                MySqlCommand checkCommand = new MySqlCommand("SELECT COUNT(*) FROM images", conn);
-                int imageCount = (int)checkCommand.ExecuteNonQuery();
-                if (imageCount > 0)
+                try
                 {
-                    // Retrieve the image data from the database
-                    MySqlCommand retrieveCommand = new MySqlCommand("SELECT image FROM images", conn);
-                    byte[] imageData = (byte[])retrieveCommand.ExecuteScalar();
+                    pictureBox3.Image = new Bitmap(openFileDialog.FileName);
 
-                    // Load the image from the byte array
-                    using (MemoryStream ms = new MemoryStream(imageData))
+                    byte[] imageData;
+                    using (MemoryStream ms = new MemoryStream())
                     {
-                        //pictureBox3.Image = Image.FromStream(ms);
-                        pictureBox3.Image = new Bitmap(Image.FromStream(ms));
+                        pictureBox3.Image.Save(ms, pictureBox3.Image.RawFormat);
+                        imageData = ms.ToArray();
+                    }
+                    if (user.UploadPicture(imageData))
+                    {
+                        MessageBox.Show("Picture updated");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error occured");
                     }
                 }
-                else
+                catch
                 {
-                    // No image found in the database
-                    OpenFileDialog openFileDialog = new OpenFileDialog();
-                    openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
-
-                    if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        string selectedImagePath = openFileDialog.FileName;
-
-                        // Load the selected image into the PictureBox
-                        pictureBox3.Image = new Bitmap(selectedImagePath);
-
-                        // Save the image to the database
-                        byte[] imageData;
-                        using (MemoryStream ms = new MemoryStream())
-                        {
-                            pictureBox3.Image.Save(ms, pictureBox3.Image.RawFormat);
-                            imageData = ms.ToArray();
-                        }
-
-                        MySqlCommand insertCommand = new MySqlCommand("INSERT INTO images (image) VALUES (@ImageData)", conn);
-                        insertCommand.Parameters.AddWithValue("@ImageData", imageData);
-                        insertCommand.ExecuteNonQuery();
-                    }
+                    MessageBox.Show("Error occured");
                 }
-
             }
         }
-
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Transfer transferform = new Transfer(user);
+            transferform.Show();
+        }
         private void Main_Load(object sender, EventArgs e)
         {
             username = user.UserName();
@@ -122,14 +110,30 @@ namespace BailoutRegister2
             
             UserNameB.Text = username;
             UserNameBox.Text = username;
-            BalanceBox.Text = balance;
+            BalanceBox.Text = balance + "$";
+
+            picture = user.GetPicture();
+
+            if (picture != null)
+            {
+                using (MemoryStream ms = new MemoryStream(picture))
+                {
+                    pictureBox3.Image = new Bitmap(ms);
+                }
+            }
+
+
 
             accountData = user.GetAccountData();
 
             accountPanel.FlowDirection = FlowDirection.TopDown;
             accountPanel.WrapContents = false;
             accountPanel.AutoScroll = true;
-
+            int k = accountPanel.ClientSize.Width;
+            if (accountData.Count > 6)
+            {
+                k = accountPanel.Width - SystemInformation.VerticalScrollBarWidth - 7;
+            }
             foreach (KeyValuePair<int, List<object>> account in accountData)
             {
                 int accountId = account.Key;
@@ -138,7 +142,12 @@ namespace BailoutRegister2
                 decimal balance = Convert.ToDecimal(accountInfo[1]);
                
                 Button button = new Button();
-                button.Text = $"{accountNumber}#{accountId} : {balance}";
+
+                button.AutoSize = false;
+                button.Width = accountPanel.Width - SystemInformation.VerticalScrollBarWidth - 7;
+                
+
+                button.Text = $"{accountNumber}#{accountId} : {balance}$";
                 button.Name = $"btnAccount_{accountId}";
                 button.Tag = accountId;
 
@@ -147,21 +156,104 @@ namespace BailoutRegister2
                 // Add the button to the panel or any other container
                 accountPanel.Controls.Add(button);
             }
+
+            if (acco)
+            {
+                transData = user.GetTransData();
+            }
+            else
+            {
+                transData = account.GetTransData();
+            }
+            //Sort the transactions by date
+            
+            var sortedTransactions = transData.OrderBy(t => ((DateTime)t.Value[4]));
+
+                try
+                {
+                    transpanel.FlowDirection = FlowDirection.TopDown;
+                    transpanel.AutoScroll = true;
+                    transpanel.Margin = new Padding(10);
+                    foreach (var transaction in sortedTransactions)
+                    {
+
+                        int transactionId = (int)transaction.Key;
+                        int accountId = (int)transaction.Value[0];
+                        int person = (int)transaction.Value[1];
+                        decimal money = Convert.ToDecimal(transaction.Value[2]);
+                        string message = (string)transaction.Value[3];
+                        DateTime date = (DateTime)transaction.Value[4];
+
+                        Button button = new Button();
+
+                        button.AutoSize = false;
+                        button.Width = transpanel.Width - SystemInformation.VerticalScrollBarWidth - 7;
+
+                        Transaction trans = new Transaction(transactionId);
+                        List<string> names = trans.GetNames();
+                        if (accountData.Keys.Contains(accountId) & accountData.Keys.Contains(person))
+                        {
+                            button.Text = $"From: {accountData[accountId][0]}#{accountId}    To: {accountData[person][0]}#{person}    Amount: {money}$";
+                        }
+                        else
+                        {
+                            if (accountData.Keys.Contains(accountId))
+                            {
+                                button.Text = $"To: {names[1]}      Account: -{money}$";
+                            }
+                            else
+                            {
+                                button.Text = $"From: {names[0]}      Account: +{money}$";
+                            }
+                        }
+
+                        button.Tag = transactionId; // Store the account ID in the Tag property of the button
+                        button.Click += Button_Click2; // Attach the event handler
+
+                        transpanel.Controls.Add(button);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            
+            
+            
         }
         private void Button_Click(object sender, EventArgs e)
         {
             // Handle button click event
             Button clickedButton = (Button)sender;
             int accountId = (int)clickedButton.Tag;
-            Account acc = new Account(accountId, data);
+            Account acc = new Account(accountId);
             Main main = new Main(data, user, acc);
             this.Hide();
             main.Show();
         }
-        private void button5_Click(object sender, EventArgs e)
+        private void Button_Click2(object sender, EventArgs e)
         {
-            Transfer transferform = new Transfer(user, data);
-            transferform.Show();
+            Button clickedButton = (Button)sender;
+            int transactionId = (int)clickedButton.Tag;
+            Transaction transaction = new Transaction(transactionId);
+            TransactionInfo trans = new TransactionInfo(transaction);
+            trans.Show();
+        }
+
+        private void UserNameB_Click(object sender, EventArgs e)
+        {
+            Main main = new Main(data, user);
+            main.Show();
+            this.Hide();
+
+        }
+
+        private void UserNameBox_Click(object sender, EventArgs e)
+        {
+            Main main = new Main(data, user);
+            main.Show();
+            this.Hide();
         }
     }
 }

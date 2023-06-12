@@ -39,16 +39,16 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Verdana", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(28, 9);
+            this.label1.Location = new System.Drawing.Point(53, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(290, 28);
+            this.label1.Size = new System.Drawing.Size(255, 28);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Terminate an account";
+            this.label1.Text = "Terminate the user";
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.Location = new System.Drawing.Point(109, 285);
+            this.button1.Location = new System.Drawing.Point(95, 285);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(148, 41);
             this.button1.TabIndex = 21;
@@ -59,13 +59,13 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(82, 88);
+            this.label2.Location = new System.Drawing.Point(72, 81);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(203, 96);
+            this.label2.Size = new System.Drawing.Size(225, 96);
             this.label2.TabIndex = 22;
-            this.label2.Text = "By terminating your account,\r\nyou aknowledge \r\nthat you won\'t be able to\r\n access" +
-    " your account anymore.\r\nThe remaining balance will be\r\n sent out to you by posta" +
-    "l service.";
+            this.label2.Text = "By terminating your user account,\r\nyou aknowledge \r\nthat you won\'t be able to\r\n a" +
+    "ccess your bank account anymore.\r\nThe remaining balance will be\r\n sent out to yo" +
+    "u by postal service.";
             // 
             // Terminate
             // 

@@ -14,11 +14,13 @@ namespace BailoutRegister2
     {
         private Data data;
         private User user;
-        public Settings(Data data, User user)
+        private Main main;
+        public Settings(Data data, User user, Main main)
         {
             InitializeComponent();
             this.data = data;
             this.user = user;
+            this.main = main;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -30,8 +32,15 @@ namespace BailoutRegister2
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Terminate terminator = new Terminate(data, user); 
+            Terminate terminator = new Terminate(data, main); 
             terminator.Show();
+            this.Hide();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            TerminateAcc acc = new TerminateAcc(user);
+            acc.Show();
             this.Hide();
         }
     }

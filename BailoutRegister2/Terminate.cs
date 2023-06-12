@@ -15,12 +15,12 @@ namespace BailoutRegister2
     public partial class Terminate : Form
     {
         private Data data;
-        private User user;
-        public Terminate(Data data, User user)
+        private Main main;
+        public Terminate(Data data, Main main)
         {
             InitializeComponent();
             this.data = data;
-            this.user = user;
+            this.main = main;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,7 +28,8 @@ namespace BailoutRegister2
             if (data.setInactive(Login.logMail,"0")==true)
             {
                 MessageBox.Show("Account deleted successfully!");
-                this.Hide();
+                this.Close();
+                main.Close();
                 Login loginpage = new Login(data);
                 loginpage.Show();
             }

@@ -9,6 +9,10 @@ using MySqlConnector;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Collections;
+using System.Security.Policy;
+using System.Xml.Linq;
+using System.Security.Cryptography;
 
 namespace BailoutRegister2
 {
@@ -54,7 +58,7 @@ namespace BailoutRegister2
 
             return 0;
         }
-        public bool Updater(string email, string password, string firstname, string lastname, DateTime dob, int gender_id,int user_id)
+        public bool Updater(string email, string password, string firstname, string lastname, DateTime dob, int gender_id, int user_id)
         {
             string query = "UPDATE users set firstname=@Firstname, lastname=@Lastname, email=@Email, password=@Password, dob=@Dob, gender_id=@Gender_id,user_id=@User_Id WHERE user_id=@User_Id;";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -133,12 +137,12 @@ namespace BailoutRegister2
                 return true;
 
             }
-            catch(Exception ex) { Console.WriteLine(ex.Message); return false; }
+            catch (Exception ex) { Console.WriteLine(ex.Message); return false; }
 
         }
-        
 
-        public bool setInactive(string email,string status)
+
+        public bool setInactive(string email, string status)
         {
             string query = "UPDATE users set act=@Status WHERE email=@Email";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -188,7 +192,7 @@ namespace BailoutRegister2
 
             foreach (KeyValuePair<string, object> parameter in parameters)
             {
-                    command.Parameters.AddWithValue("@" + parameter.Key, parameter.Value);
+                command.Parameters.AddWithValue("@" + parameter.Key, parameter.Value);
             }
             try
             {
@@ -216,6 +220,26 @@ namespace BailoutRegister2
                 return "";
             }
         }
+        public byte[] GetImage(string query)
+        {
+            try
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                object result = command.ExecuteScalar();
+
+                if (result != DBNull.Value)
+                {
+                    return (byte[])result;
+                }
+
+                return null;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("MySQL Exception: " + ex.Message);
+                return null;
+            }
+        }
 
         public Dictionary<int, List<object>> GetAccounts(string query, int id)
         {
@@ -223,33 +247,73 @@ namespace BailoutRegister2
 
             try
             {
-                
+
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@UserId", id);
 
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
-                    while(reader.Read())
+                    while (reader.Read())
                     {
                         int accountId = reader.GetInt32("account_id");
                         string accountName = reader.GetString("name");
                         int balance = reader.GetInt32("money");
 
-                        List<object> accountInfo = new List<object> {accountName, balance };
+                        List<object> accountInfo = new List<object> { accountName, balance };
 
                         accountDict.Add(accountId, accountInfo);
                     }
-                    
+
                 }
                 return accountDict;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return accountDict;
             }
-            
+
         }
+
+        public Dictionary<int, List<object>> GetTransactions(string query, int id)
+        {
+            Dictionary<int, List<object>> transDict = new Dictionary<int, List<object>>();
+
+            try
+            {
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Id", id);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int transId = reader.GetInt32("transaction_id");
+                        int accountId = reader.GetInt32("account_id");
+                        int person = reader.GetInt32("person");
+                        int money = reader.GetInt32("money");
+                        object messageValue = reader["message"];
+                        string message = messageValue != DBNull.Value ? (string)messageValue : string.Empty;
+                        DateTime date = reader.GetDateTime("date");
+
+                        List<object> transInfo = new List<object> { accountId, person, money, message, date };
+
+                        transDict.Add(transId, transInfo);
+                    }
+
+                }
+
+                return transDict;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return transDict;
+            }
+        }
+
+
 
         public bool Update(Dictionary<string, object> parameters, string table, string condition)
         {
@@ -278,7 +342,80 @@ namespace BailoutRegister2
                     return false;
                 }
             }
-            
         }
-    }
+        public List<string> GetNames(string query, int id)
+        {
+            List<string> names = new List<string>();
+            try
+            {
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Id", id);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        string user1FirstName = reader.GetString("user1_firstname");
+                        string user1SecondName = reader.GetString("user1_secondname");
+                        string user2FirstName = reader.GetString("user2_firstname");
+                        string user2SecondName = reader.GetString("user2_secondname");
+
+                        string user1name = user1FirstName + " " + user1SecondName;
+                        string user2name = user2FirstName + " " +  user2SecondName;
+                        names.Add(user1name);
+                        names.Add(user2name);
+                    }
+
+                }
+
+                return names;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return names;
+            }
+        }
+        public List<object> GetTransactionData(string query, int id)
+        {
+            List<object> transaction = new List<object>();
+            try
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Id", id);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int accountId = reader.GetInt32("account_id");
+                        int person = reader.GetInt32("person");
+                        int money = reader.GetInt32("money");
+                        object messageValue = reader["message"];
+                        string message = messageValue != DBNull.Value ? (string)messageValue : string.Empty;
+                        DateTime date = reader.GetDateTime("date");
+
+                        List<object> transInfo = new List<object> { accountId, person, money, message, date };
+
+                        transaction.Add(accountId);
+                        transaction.Add(person);
+                        transaction.Add(money);
+                        transaction.Add(message);
+                        transaction.Add(date);
+                    }
+
+                }
+                return transaction;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return transaction;
+            }
+        }
+
+    } 
 }
+
