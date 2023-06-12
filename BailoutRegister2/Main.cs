@@ -191,17 +191,14 @@ namespace BailoutRegister2
 
                 foreach (KeyValuePair<int, List<object>> transaction in transData)
                 {
-                    Console.WriteLine(-1);
+                    
                     int transactionId = (int)transaction.Key;
-                    Console.WriteLine(0);
+                    
                     int accountId = (int)transaction.Value[0];
-                    Console.WriteLine(1);
+                    
                     int person = (int)transaction.Value[1];
-                    Console.WriteLine(2);
                     decimal money = Convert.ToDecimal(transaction.Value[2]);
-                    Console.WriteLine(3);
                     string message = (string)transaction.Value[3];
-                    Console.WriteLine(4);
                     DateTime date = (DateTime)transaction.Value[4];
 
                     Button button = new Button();

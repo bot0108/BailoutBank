@@ -194,16 +194,24 @@ namespace BailoutRegister2
         }
         public void MakeAutoTransaction(int person, decimal amount, DateTime start, DateTime end, string frequency)
         {
-            Dictionary<string, object> parameters = new Dictionary<string, object>
+            try
             {
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
                             {"account_id", AccountId },
                             {"frequency", frequency },
                             {"money", amount },
                             {"start_date", start},
                             {"end_date", end},
                             {"account_id2", person },
-            };
-            data.Insert(parameters, "autotrans");
+                };
+                data.Insert(parameters, "autotrans");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
     }
 }

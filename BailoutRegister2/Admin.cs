@@ -15,11 +15,11 @@ namespace BailoutRegister2
 {
     public partial class Admin : Form
     {
-        public Data data;
-        public Admin(Data data)
+        public Data data = new Data();
+        public Admin()
         {
             InitializeComponent();
-            this.data = data;
+            data.Initialize();
         }
 
         private void Load_Click(object sender, EventArgs e)
