@@ -19,6 +19,7 @@ namespace BailoutRegister2
         {
             InitializeComponent();
             this.data = data;
+
             this.user = user;
             this.main = main;
         }
@@ -39,7 +40,7 @@ namespace BailoutRegister2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            TerminateAcc acc = new TerminateAcc(user, main);
+            TerminateAcc acc = new TerminateAcc(user, main, data);
             acc.Show();
             this.Hide();
         }

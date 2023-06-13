@@ -68,7 +68,7 @@ namespace BailoutRegister2
 
 
                     MessageBox.Show("Login successful!");
-                    User user = new User(id);
+                    User user = new User(id, data);
                     Factor authenticator = new Factor(data, user);
                     authenticator.Show();
                     this.Hide();

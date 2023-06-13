@@ -15,8 +15,10 @@ namespace BailoutRegister2
     {
         User user;
         Main main;
-        public Transfer(User user, Main main)
+        Data data;
+        public Transfer(User user, Main main, Data data)
         {
+            this.data = data;
             InitializeComponent();
             this.user = user;
             this.main = main;
@@ -44,7 +46,7 @@ namespace BailoutRegister2
                         DateTime start = start_dob.Value.Date;
                         DateTime end = end_dob.Value.Date;
                         string frequency = freque.Text;
-                        Account account = new Account(accountId);
+                        Account account = new Account(accountId, data);
                         if (account.Balance < Convert.ToDecimal(money.Text))
                         {
                             MessageBox.Show("Not enough money on account");
@@ -55,7 +57,7 @@ namespace BailoutRegister2
                         }
                         else
                         {
-                            Account acc = new Account(person);
+                            Account acc = new Account(person, data);
                             if (acc.IsActive())
                             {
                                 account.MakeAutoTransaction(person, amount, start, end, frequency);
@@ -84,14 +86,14 @@ namespace BailoutRegister2
                     {
                         decimal amount = Convert.ToDecimal(money.Text);
                         int accountId = Convert.ToInt32(from.Text.Split(':')[0].Split('#')[1]);
-                        Account account = new Account(accountId);
+                        Account account = new Account(accountId, data);
                         if (account.Balance < Convert.ToDecimal(money.Text))
                         {
                             MessageBox.Show("Not enough money on account");
                         }
                         else
                         {
-                            Account accc = new Account(Convert.ToInt32(to.Text.Split('#')[1]));
+                            Account accc = new Account(Convert.ToInt32(to.Text.Split('#')[1]), data);
                             if (accc.IsActive())
                             {
                                 account.MakeTransaction(Convert.ToInt32(to.Text.Split('#')[1]), Convert.ToDecimal(money.Text), message.Text);
@@ -133,6 +135,12 @@ namespace BailoutRegister2
                 decimal balance = Convert.ToDecimal(accountInfo[1]);
                 from.Items.Add($"{accountNumber}#{accountId} : {balance}$");
             }
+            start_dob.Value = DateTime.Now.AddDays(1);
+            start_dob.MinDate = DateTime.Now.AddDays(1);
+
+            end_dob.Value = DateTime.Now.AddDays(8);
+            end_dob.MinDate = DateTime.Now.AddDays(8);
         }
+
     }
 }

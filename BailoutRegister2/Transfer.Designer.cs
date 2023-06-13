@@ -111,6 +111,7 @@
             this.to.Name = "to";
             this.to.Size = new System.Drawing.Size(314, 22);
             this.to.TabIndex = 7;
+            this.to.Text = "#x";
             // 
             // button1
             // 
@@ -194,6 +195,7 @@
             this.start_dob.Name = "start_dob";
             this.start_dob.Size = new System.Drawing.Size(233, 22);
             this.start_dob.TabIndex = 15;
+            this.start_dob.Value = new System.DateTime(2023, 6, 13, 0, 0, 0, 0);
             // 
             // end_dob
             // 
@@ -201,6 +203,7 @@
             this.end_dob.Name = "end_dob";
             this.end_dob.Size = new System.Drawing.Size(233, 22);
             this.end_dob.TabIndex = 16;
+            this.end_dob.Value = new System.DateTime(2023, 6, 13, 0, 0, 0, 0);
             // 
             // label6
             // 

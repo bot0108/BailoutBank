@@ -14,9 +14,11 @@ namespace BailoutRegister2
     {
         User user;
         Main main;
+        Data data;
         List<int> accountIDs = new List<int>();
-        public TerminateAcc(User user, Main main)
+        public TerminateAcc(User user, Main main, Data data)
         {
+            this.data = data;
             InitializeComponent();
             this.user = user;
             this.main = main;
@@ -28,22 +30,23 @@ namespace BailoutRegister2
             {
                 if (accounts.Text != "")
                 {
-                    Account acc = new Account(Convert.ToInt32(accounts.Text.Split('#')[1]));
-                    if((accountIDs.Count == 1) &(acc.Balance != 0))
+                    Account acc = new Account(Convert.ToInt32(accounts.Text.Split('#')[1]), data);
+                    if((accountIDs.Count == 1) & (acc.Balance != 0))
                     {
                         MessageBox.Show("Sorry, you have only one account,\nwe cannot transfer your money to any other account.\nIf you want to terminate your bank user,\nplease go to Terminate user");
                         this.Hide();
                     }
                     else
                     {
-                        Console.WriteLine(accountIDs);
+                        
                         foreach (int accountI in accountIDs)
                         {
                             if (accountI != Convert.ToInt32(accounts.Text.Split('#')[1]))
                             {
-                                Console.WriteLine(accountI);
-                                Console.WriteLine(acc.Balance);
-                                acc.MakeTransaction(accountI, acc.Balance, "Termination of the account");
+                                if(acc.Balance > 0)
+                                {
+                                    acc.MakeTransaction(accountI, acc.Balance, "Termination of the account");
+                                }
                                 break;
                             }
                         }

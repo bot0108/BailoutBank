@@ -55,7 +55,7 @@ namespace BailoutRegister2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Create createrform = new Create(user);
+            Create createrform = new Create(user, this);
             createrform.Show();
         }
 
@@ -76,13 +76,18 @@ namespace BailoutRegister2
                         pictureBox3.Image.Save(ms, pictureBox3.Image.RawFormat);
                         imageData = ms.ToArray();
                     }
-                    if (user.UploadPicture(imageData))
+                    int maxSizeInBytes = 11 * 1024 * 1024;
+                    if (imageData.Length > maxSizeInBytes)
+                    {
+                        MessageBox.Show("Sorry, this picture is too big");
+                    }
+                    else if (user.UploadPicture(imageData))
                     {
                         MessageBox.Show("Picture updated");
                     }
                     else
                     {
-                        MessageBox.Show("Error occured");
+                        MessageBox.Show("Sorry, this picture is not supported");
                     }
                 }
                 catch
@@ -93,7 +98,7 @@ namespace BailoutRegister2
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            Transfer transferform = new Transfer(user, this);
+            Transfer transferform = new Transfer(user, this, data);
             transferform.Show();
         }
         private void Main_Load(object sender, EventArgs e)
@@ -174,11 +179,6 @@ namespace BailoutRegister2
                 transData = account.GetTransData();
             }
 
-            //Sort the transactions by date
-
-            var sortedTransactions = transData.OrderBy(t => ((DateTime)t.Value[4]));
-
-
             try
             { 
                 transpanel.FlowDirection = FlowDirection.TopDown;
@@ -204,7 +204,7 @@ namespace BailoutRegister2
                     button.AutoSize = false;
                     button.Width = transpanel.Width - SystemInformation.VerticalScrollBarWidth - 7;
 
-                    Transaction trans = new Transaction(transactionId);
+                    Transaction trans = new Transaction(transactionId, data);
                     List<string> names = trans.GetNames();
                     if (accountDataFull.Keys.Contains(accountId) & accountDataFull.Keys.Contains(person))
                     {
@@ -242,7 +242,7 @@ namespace BailoutRegister2
             // Handle button click event
             Button clickedButton = (Button)sender;
             int accountId = (int)clickedButton.Tag;
-            Account acc = new Account(accountId);
+            Account acc = new Account(accountId, data);
             Main main = new Main(user, acc);
             this.Hide();
             main.Show();
@@ -251,7 +251,7 @@ namespace BailoutRegister2
         {
             Button clickedButton = (Button)sender;
             int transactionId = (int)clickedButton.Tag;
-            Transaction transaction = new Transaction(transactionId);
+            Transaction transaction = new Transaction(transactionId, data);
             TransactionInfo trans = new TransactionInfo(transaction);
             trans.Show();
         }

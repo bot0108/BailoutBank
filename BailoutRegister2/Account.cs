@@ -12,16 +12,16 @@ namespace BailoutRegister2
 {
     public class Account
     {
-        private Data data = new Data();
+        private Data data;
         private int AccountId { get; set; }
         public string UserId { get; set; }
         public string AccountName { get; set; }
         public decimal Balance { get; set; }
 
-        public Account(int id)
+        public Account(int id, Data data)
         {
             AccountId = id;
-            data.Initialize();
+            this.data = data;
             UserId = GetUserId();
         }
 
@@ -72,7 +72,7 @@ namespace BailoutRegister2
                 if (k)
                 {
                     //gives money
-                    Account acc = new Account(to);
+                    Account acc = new Account(to, data);
                     newBalance = acc.Balance + amount;
                     parameters = new Dictionary<string, object>
                 {

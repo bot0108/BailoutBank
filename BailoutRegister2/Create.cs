@@ -13,17 +13,19 @@ namespace BailoutRegister2
     public partial class Create : Form
     {
         private User user;
-        public Create(User user)
+        private Main main;
+        public Create(User user, Main main)
         {
             InitializeComponent();
             this.user = user;
+            this.main = main;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (accname.Text == "")
             {
-                MessageBox.Show("Add a name, dummy");
+                MessageBox.Show("Add a name");
             }
             else if (checkBox1.Checked || checkBox2.Checked)
             {
@@ -33,10 +35,14 @@ namespace BailoutRegister2
                     if (user.CreateAccount(accname.Text, typ))
                     {
                         MessageBox.Show("Account made");
+                        main.Close();
+                        Main main1 = new Main(user);
+                        main1.Show();
+                        this.Hide();
                     }
                     else
                     {
-                        MessageBox.Show("it's like YOU ARE THE PROBLEM");
+                        MessageBox.Show("Error occured");
                     }
                 }
                 else
@@ -45,17 +51,21 @@ namespace BailoutRegister2
                     if (user.CreateAccount(accname.Text, typ))
                     {
                         MessageBox.Show("Account made");
+                        main.Close();
+                        Main main1 = new Main(user);
+                        main1.Show();
+                        this.Hide();
                     }
                     else
                     {
-                        MessageBox.Show("it's like YOU ARE THE PROBLEM");
+                        MessageBox.Show("Error occured");
                     }
                 }
 
             }
             else
             {
-                MessageBox.Show("Add a type, dummy");
+                MessageBox.Show("Choose a type");
             }
         }
     }

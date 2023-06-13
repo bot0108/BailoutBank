@@ -9,11 +9,12 @@ namespace BailoutRegister2
     public class Transaction
     {
         public int ID { get; set; }
-        Data data = new Data();
-        public Transaction(int id)
+        Data data;
+        public Transaction(int id, Data data)
         {
             ID = id;
-            data.Initialize();
+            this.data = new Data();
+            this.data.Initialize();
         }
 
         public List<string> GetNames()

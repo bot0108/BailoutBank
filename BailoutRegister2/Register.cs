@@ -54,6 +54,11 @@ namespace BailoutRegister2
                     MessageBox.Show("Confirmation E-mail is Wrong!");
                     return;
                 }
+                else if(password.Text.Length < 8)
+                {
+                    MessageBox.Show("Password must contain at least 8 characters!");
+                    return;
+                }
                 else if (password.Text != conpassword.Text)
                 {
                     MessageBox.Show("Confirmation Password is Wrong!");
@@ -74,7 +79,7 @@ namespace BailoutRegister2
                 g = 1;
             }
 
-            if (data.Register(firstname.Text, password.Text, firstname.Text, lastname.Text, dob.Value, g) == 0)
+            if (data.Register(email.Text, password.Text, firstname.Text, lastname.Text, dob.Value, g) == 0)
             {
                 MessageBox.Show("Account Created!");
                 this.Hide();

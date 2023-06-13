@@ -12,28 +12,37 @@ namespace BailoutRegister2
 {
     public class User
     {
-        private Data data = new Data();
+        private Data data;
         private int ID { get; set; }
 
-        public User(int id)
+        public User(int id, Data data)
         {
             ID = id;
-            data.Initialize();
+            this.data = data;
+            this.data.Initialize();
         }
 
         public bool CreateAccount(string name, int type)
         {
-
-            Dictionary<string, object> parameters = new Dictionary<string, object>
+            try
             {
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
                 {"user_id", ID },
                 {"name", name },
                 {"acctype_id", type }
-            };
+                };
 
-            // Pass the table name, query, and parameters to the database class
-            bool k = data.Insert(parameters, "accounts");
-            return k;
+                // Pass the table name, query, and parameters to the database class
+                bool k = data.Insert(parameters, "accounts");
+                return k;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            
         }
 
         public string UserName()

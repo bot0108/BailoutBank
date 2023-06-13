@@ -13,6 +13,7 @@ using System.Collections;
 using System.Security.Policy;
 using System.Xml.Linq;
 using System.Security.Cryptography;
+using System.Data;
 
 namespace BailoutRegister2
 {
@@ -23,10 +24,18 @@ namespace BailoutRegister2
         public void Initialize()
         {
             connection = new MySqlConnection(connectionString);
-            connection.Open();
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+            
         }
         public int RegisterValidator(string email)
         {
+            if (connection.State == ConnectionState.Closed)
+            {
+                connection.Open();
+            }
             string query = "SELECT COUNT(*) FROM users WHERE email=@Email;";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@Email", email);
@@ -39,27 +48,42 @@ namespace BailoutRegister2
         }
         public int Register(string email, string password, string firstname, string lastname, DateTime dob, int gender_id)
         {
-
-            string query = $"INSERT INTO users (firstname, lastname, email, password, dob, gender_id) VALUES (@Firstname, @Lastname, @Email, @Password, @Dob, @Gender_id);";
-            MySqlCommand command = new MySqlCommand(query, connection);
-
-            command.Parameters.AddWithValue("@Firstname", firstname);
-            command.Parameters.AddWithValue("@Lastname", lastname);
-            command.Parameters.AddWithValue("@Email", email);
-            command.Parameters.AddWithValue("@Password", password);
-            command.Parameters.AddWithValue("@Dob", dob);
-            command.Parameters.AddWithValue("@Gender_id", gender_id);
-
-            int rowsAffected = command.ExecuteNonQuery();
-            if (rowsAffected != 1)
+            try
             {
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
+                string query = $"INSERT INTO users (firstname, lastname, email, password, dob, gender_id) VALUES (@Firstname, @Lastname, @Email, @Password, @Dob, @Gender_id);";
+                MySqlCommand command = new MySqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@Firstname", firstname);
+                command.Parameters.AddWithValue("@Lastname", lastname);
+                command.Parameters.AddWithValue("@Email", email);
+                command.Parameters.AddWithValue("@Password", password);
+                command.Parameters.AddWithValue("@Dob", dob);
+                command.Parameters.AddWithValue("@Gender_id", gender_id);
+
+                int rowsAffected = command.ExecuteNonQuery();
+                if ((rowsAffected != 1))
+                {
+                    return 2;
+                }
+                return 0;
+
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
                 return 2;
             }
-
-            return 0;
+            
         }
         public bool Updater(string email, string password, string firstname, string lastname, DateTime dob, int gender_id, int user_id)
         {
+            if (connection.State == ConnectionState.Closed)
+            {
+                connection.Open();
+            }
             string query = "UPDATE users set firstname=@Firstname, lastname=@Lastname, email=@Email, password=@Password, dob=@Dob, gender_id=@Gender_id,user_id=@User_Id WHERE user_id=@User_Id;";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@Firstname", firstname);
@@ -83,6 +107,10 @@ namespace BailoutRegister2
         {
             try
             {
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
                 string query = "SELECT user_id FROM users WHERE email = @Email AND password = @Password";
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -110,6 +138,10 @@ namespace BailoutRegister2
 
         public bool IsActive(string email)
         {
+            if (connection.State == ConnectionState.Closed)
+            {
+                connection.Open();
+            }
             string query = "SELECT act FROM users WHERE email=@Email";
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
@@ -128,89 +160,102 @@ namespace BailoutRegister2
 
         public bool UpdatePass(string email, string newpassword)
         {
-            string query = "UPDATE users set password=@Newpassword WHERE email = @Email";
-            MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@Email", email);
-            command.Parameters.AddWithValue("@Newpassword", newpassword);
-            try {
-                int result = command.ExecuteNonQuery();
-                return true;
-
-            }
-            catch (Exception ex) { Console.WriteLine(ex.Message); return false; }
-
-        }
-
-
-        public bool setInactive(string email, string status)
-        {
-            string query = "UPDATE users set act=@Status WHERE email=@Email";
-            MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@Email", email);
-            command.Parameters.AddWithValue("@Status", status);
             try
             {
-                int result = command.ExecuteNonQuery();
-                return true;
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
+                string query = "UPDATE users set password=@Newpassword WHERE email = @Email";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Email", email);
+                command.Parameters.AddWithValue("@Newpassword", newpassword);
+                try
+                {
+                    int result = command.ExecuteNonQuery();
+                    return true;
 
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); return false; }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); return false; }
         }
+
         public bool setInactiveID(int id)
         {
-            string query = "UPDATE users set act=0 WHERE user_id=@ID";
-            MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@ID", id);
             try
             {
-                int result = command.ExecuteNonQuery();
-
-                query = "UPDATE accounts set act=0 WHERE user_id=@ID";
-                command = new MySqlCommand(query, connection);
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
+                string query = "UPDATE users set act=0 WHERE user_id=@ID";
+                MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@ID", id);
+                try
+                {
+                    int result = command.ExecuteNonQuery();
 
-                result = command.ExecuteNonQuery();
-                
-                return true;
+                    query = "UPDATE accounts set act=0 WHERE user_id=@ID";
+                    command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@ID", id);
+
+                    result = command.ExecuteNonQuery();
+
+                    return true;
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); return false; }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); return false; }
+            
         }
 
 
         public bool Insert(Dictionary<string, object> parameters, string table)
         {
-
-            string query = $"INSERT INTO {table} (";
-
-            foreach (string columnName in parameters.Keys)
-            {
-                query += columnName + ", ";
-            }
-            query = query.TrimEnd(',', ' ') + ") VALUES (";
-
-            foreach (string columnName in parameters.Keys)
-            {
-                query += "@" + columnName + ", ";
-            }
-            query = query.TrimEnd(',', ' ') + ")";
-
-            MySqlCommand command = new MySqlCommand(query, connection);
-
-            foreach (KeyValuePair<string, object> parameter in parameters)
-            {
-                command.Parameters.AddWithValue("@" + parameter.Key, parameter.Value);
-            }
             try
             {
-                Console.WriteLine(query);
-                int rowsAffected = command.ExecuteNonQuery();
-                return true;
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
+                string query = $"INSERT INTO {table} (";
+
+                foreach (string columnName in parameters.Keys)
+                {
+                    query += columnName + ", ";
+                }
+                query = query.TrimEnd(',', ' ') + ") VALUES (";
+
+                foreach (string columnName in parameters.Keys)
+                {
+                    query += "@" + columnName + ", ";
+                }
+                query = query.TrimEnd(',', ' ') + ")";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+
+                foreach (KeyValuePair<string, object> parameter in parameters)
+                {
+                    command.Parameters.AddWithValue("@" + parameter.Key, parameter.Value);
+                }
+                try
+                {
+                    int rowsAffected = command.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return false;
             }
+            
         }
 
 
@@ -218,6 +263,10 @@ namespace BailoutRegister2
         {
             try
             {
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
                 MySqlCommand command = new MySqlCommand(query, connection);
                 string info = command.ExecuteScalar()?.ToString();
                 return info;
@@ -232,6 +281,10 @@ namespace BailoutRegister2
         {
             try
             {
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
                 MySqlCommand command = new MySqlCommand(query, connection);
                 object result = command.ExecuteScalar();
                 if (result != null && result != DBNull.Value)
@@ -254,6 +307,10 @@ namespace BailoutRegister2
         {
             try
             {
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
                 MySqlCommand command = new MySqlCommand(query, connection);
                 object result = command.ExecuteScalar();
 
@@ -277,7 +334,10 @@ namespace BailoutRegister2
 
             try
             {
-
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@UserId", id);
 
@@ -311,7 +371,10 @@ namespace BailoutRegister2
 
             try
             {
-
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Id", id);
 
@@ -347,30 +410,42 @@ namespace BailoutRegister2
 
         public bool Update(Dictionary<string, object> parameters, string table, string condition)
         {
-            string query = $"UPDATE {table} SET ";
-
-            foreach (string columnName in parameters.Keys)
+            try
             {
-                query += $"{columnName}=@{columnName}, ";
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
+                string query = $"UPDATE {table} SET ";
+
+                foreach (string columnName in parameters.Keys)
+                {
+                    query += $"{columnName}=@{columnName}, ";
+                }
+                query = query.TrimEnd(',', ' ') + $" WHERE {condition}";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
+                    foreach (KeyValuePair<string, object> parameter in parameters)
+                    {
+                        command.Parameters.AddWithValue("@" + parameter.Key, parameter.Value);
+                    }
+                    try
+                    {
+                        int rowsAffected = command.ExecuteNonQuery();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("MySQL Exception: " + ex.Message);
+                        return false;
+                    }
+                
             }
-            query = query.TrimEnd(',', ' ') + $" WHERE {condition}";
-
-            using (MySqlCommand command = new MySqlCommand(query, connection))
+            catch(Exception ex)
             {
-                foreach (KeyValuePair<string, object> parameter in parameters)
-                {
-                    command.Parameters.AddWithValue("@" + parameter.Key, parameter.Value);
-                }
-                try
-                {
-                    int rowsAffected = command.ExecuteNonQuery();
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("MySQL Exception: " + ex.Message);
-                    return false;
-                }
+                Console.WriteLine("MySQL Exception: " + ex.Message);
+                return false;
             }
         }
         public List<string> GetNames(string query, int id)
@@ -378,7 +453,10 @@ namespace BailoutRegister2
             List<string> names = new List<string>();
             try
             {
-
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Id", id);
 
@@ -413,6 +491,10 @@ namespace BailoutRegister2
             List<object> transaction = new List<object>();
             try
             {
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Id", id);
 
