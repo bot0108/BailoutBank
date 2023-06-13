@@ -200,10 +200,10 @@ namespace BailoutRegister2
                 {
                             {"account_id", AccountId },
                             {"frequency", frequency },
-                            {"money", amount },
-                            {"start_date", start},
-                            {"end_date", end},
-                            {"account_id2", person },
+                            {"amount", amount },
+                            {"start_date", start.Date},
+                            {"end_date", end.Date},
+                            {"account_id2", person }
                 };
                 data.Insert(parameters, "autotrans");
             }

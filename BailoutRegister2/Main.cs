@@ -174,8 +174,6 @@ namespace BailoutRegister2
                 transData = account.GetTransData();
             }
 
-            Console.WriteLine(transData.Keys);
-
             //Sort the transactions by date
 
             var sortedTransactions = transData.OrderBy(t => ((DateTime)t.Value[4]));

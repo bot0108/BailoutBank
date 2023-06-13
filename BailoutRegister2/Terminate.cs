@@ -16,16 +16,18 @@ namespace BailoutRegister2
     {
         private Data data;
         private Main main;
-        public Terminate(Data data, Main main)
+        private User user;
+        public Terminate(Data data, Main main, User user)
         {
             InitializeComponent();
             this.data = data;
             this.main = main;
+            this.user = user;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (data.setInactive(Login.logMail,"0")==true)
+            if (data.setInactiveID(user.GetId())==true)
             {
                 MessageBox.Show("Account deleted successfully!");
                 this.Close();

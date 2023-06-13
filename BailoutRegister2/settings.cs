@@ -32,7 +32,7 @@ namespace BailoutRegister2
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Terminate terminator = new Terminate(data, main); 
+            Terminate terminator = new Terminate(data, main, user); 
             terminator.Show();
             this.Hide();
         }

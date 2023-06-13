@@ -13,7 +13,7 @@ namespace BailoutRegister2
     public class User
     {
         private Data data = new Data();
-        public int ID { get; set; }
+        private int ID { get; set; }
 
         public User(int id)
         {
@@ -73,7 +73,10 @@ namespace BailoutRegister2
                 return "";
             }
         }
-
+        public int GetId()
+        {
+            return ID;
+        }
         public Dictionary<int, List<object>> GetAccountData()
         {
             Dictionary<int, List<object>> accountData = new Dictionary<int, List<object>>();

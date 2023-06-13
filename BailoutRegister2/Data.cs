@@ -164,8 +164,14 @@ namespace BailoutRegister2
             try
             {
                 int result = command.ExecuteNonQuery();
-                return true;
 
+                query = "UPDATE accounts set act=0 WHERE user_id=@ID";
+                command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ID", id);
+
+                result = command.ExecuteNonQuery();
+                
+                return true;
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); return false; }
         }
@@ -196,11 +202,13 @@ namespace BailoutRegister2
             }
             try
             {
+                Console.WriteLine(query);
                 int rowsAffected = command.ExecuteNonQuery();
                 return true;
             }
-            catch
+            catch(Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }
